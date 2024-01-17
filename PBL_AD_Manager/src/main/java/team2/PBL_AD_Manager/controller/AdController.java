@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import team2.PBL_AD_Manager.domain.adType.Ad;
+import team2.PBL_AD_Manager.domain.adType.Image;
 import team2.PBL_AD_Manager.service.AdService;
 
 @Controller
 @RequiredArgsConstructor
-public class MainController {
+public class AdController {
 	@Getter
 	static class AdList {
 		private List<Ad> adList = new ArrayList<>();
@@ -23,13 +24,26 @@ public class MainController {
 
 	private final AdService adService;
 
-	@GetMapping("/")
+	@GetMapping("getAd")
 	@ResponseBody
-	public String getAdApi(@RequestParam("page") int page) {
-		AdController.AdList adList = new AdController.AdList();
+	public AdList getAdApi(@RequestParam("page") int page) {
+		AdList adList = new AdList();
 		List<Ad> ads = adService.findAds();
 		adList.getAdList().addAll(ads);
 
-		return "main";
+		return adList;
+	}
+
+	@GetMapping("setAd")
+	public void setAdApi() {
+		Image image = new Image();
+		image.setBottomText("BottomText 입니다");
+		image.setSize(1L);
+		image.setHeight(1L);
+		image.setClickCount(100);
+		image.setUrl("http://localhost3000");
+		image.setTopText("TopText 입니다");
+
+		adService.saveAd(image);
 	}
 }
