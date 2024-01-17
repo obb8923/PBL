@@ -26,6 +26,20 @@ public class AdRepository {
 		return em.createQuery("select a from Ad a", Ad.class).getResultList();
 	}
 
+	// AdRepository.java
+	public Long findTotalNumber() {
+		String jpql = "SELECT COUNT(a) FROM Ad a";
+		return em.createQuery(jpql, Long.class).getSingleResult();
+	}
+
+	public List<Ad> findAllWithPagination(int startIdx, int entIdx) {
+		String jpql = "SELECT a FROM Ad a WHERE a.id >= :startIdx AND a.id <= :entIdx";
+		return em.createQuery(jpql, Ad.class)
+			.setParameter("startIdx", startIdx)
+			.setParameter("entIdx", entIdx)
+			.getResultList();
+	}
+
 	/**
 	 * 타겟 광고 찾는 코드
 	 */

@@ -1,6 +1,9 @@
 package team2.PBL_AD_Manager.service;
 
+import static org.aspectj.runtime.internal.Conversions.*;
 import static org.assertj.core.api.Assertions.*;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +37,27 @@ class AdServiceTest {
 		assertThat(findImageAd.getId()).isEqualTo(imageAd.getId());
 		assertThat(findVideoAd.getId()).isEqualTo(videoAd.getId());
 
+	}
+
+	@Test
+	void AD_count() {
+		Long totalNumber = adRepository.findTotalNumber();
+		assertThat(intValue(totalNumber)).isEqualTo(9);
+	}
+
+	@Test
+	void AD_idx() {
+		List<Ad> li = adRepository.findAllWithPagination(1, 3);
+		for (int i = 0; i < li.size(); i++) {
+			System.out.println(li.get(i).getId());
+		}
+	}
+
+	@Test
+	void AD_page() throws Exception {
+		List<Ad> li = adService.findAdsByPage(1);
+		for (int i = 0; i < li.size(); i++) {
+			System.out.println(li.get(i).getId());
+		}
 	}
 }

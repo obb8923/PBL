@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.Getter;
@@ -44,5 +45,12 @@ public class MainController {
 		adForm.getStartDate();
 		adForm.getEndDate();
 		return "/";
+	}
+
+	@GetMapping("/hi/{pageNum}")
+	public String pagination(@PathVariable("pageNum") int pageNum, Model model) throws Exception {
+		List<Ad> adList = adService.findAdsByPage(pageNum);
+		model.addAttribute("adList", adList);
+		return "main";
 	}
 }
