@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import team2.PBL_AD_Manager.domain.Contracts;
 import team2.PBL_AD_Manager.domain.adType.Ad;
 import team2.PBL_AD_Manager.service.AdService;
 
@@ -32,7 +33,16 @@ public class MainController {
 
 	@PostMapping("/contract/create")
 	public String create(AdForm adForm) {
+		Contracts contracts = new Contracts();
 
+		adForm.getAge();
+		adForm.getName();
+		adForm.getPrice();
+		adForm.getGender();
+		adForm.getTitle();
+		adForm.getSlotPosition();
+		adForm.getStartDate();
+		adForm.getEndDate();
 		return "/";
 	}
 }
