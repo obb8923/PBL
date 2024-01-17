@@ -6,7 +6,6 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +22,4 @@ public class TargetInf {
 	private Gender gender;
 
 	private int age;
-
-	@OneToOne(mappedBy = "targetInf")
-	private Contracts contracts;
 }

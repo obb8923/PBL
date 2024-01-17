@@ -27,4 +27,5 @@ public class MainController {
 		model.addAttribute("ads", adService.findAds());
 		return "main";
 	}
+
 }

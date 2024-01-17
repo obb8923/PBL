@@ -35,7 +35,7 @@ public class AdController {
 	}
 
 	@GetMapping("setAd")
-	public void setAdApi() {
+	public String setAdApi() {
 		Image image = new Image();
 		image.setBottomText("BottomText 입니다");
 		image.setSize(1L);
@@ -45,5 +45,7 @@ public class AdController {
 		image.setTopText("TopText 입니다");
 
 		adService.saveAd(image);
+
+		return "main";
 	}
 }
