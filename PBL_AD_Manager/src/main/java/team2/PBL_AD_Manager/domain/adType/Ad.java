@@ -3,6 +3,7 @@ package team2.PBL_AD_Manager.domain.adType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import team2.PBL_AD_Manager.domain.Contracts;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -26,4 +27,7 @@ public abstract class Ad {
     private String url;
 
     private int clickCount;
+
+    @OneToOne(mappedBy = "ad")
+    private Contracts contracts;
 }

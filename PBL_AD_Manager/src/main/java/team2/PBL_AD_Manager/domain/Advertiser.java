@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,9 +16,9 @@ public class Advertiser {
 
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "advertiser")
     /**
      * 만약 검색을 추가하면 회사명으로 DB 전체 조회
      */
-    private List<Contracts> contracts;
+    private List<Contracts> contracts = new ArrayList<>();
 }

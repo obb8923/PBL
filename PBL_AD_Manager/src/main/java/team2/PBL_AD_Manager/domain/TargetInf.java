@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 public class TargetInf {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "targetInf_id")
     private Long id;
 
@@ -15,4 +17,7 @@ public class TargetInf {
     private Gender gender;
 
     private int age;
+
+    @OneToOne(mappedBy = "targetInf")
+    private Contracts contracts;
 }
