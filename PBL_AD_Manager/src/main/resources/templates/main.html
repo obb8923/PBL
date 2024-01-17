@@ -11,22 +11,24 @@
 
 <body>
 <!-- 레이어 팝업 ADD-->
-<div id="popupContainer" class="popup-container">
+<form role="form" th:object="${adForm}" id="popupContainer" class="popup-container" action="/contract/create"
+      method="post">
     <div class="popup">
-        <div>회사명: <input id="addCompanyName"/></div>
-        <div>광고제목: <input id="addADName"/></div>
-        <div>광고조건: <input id="addADCondition"/></div>
-        <div>슬롯위치: <input id="addSlot"/></div>
-        <div>비용: <input id="addCost"/></div>
-        <div>시작일: <input id="addDayStart"/></div>
-        <div>만료일: <input id="addDayEnd"/></div>
+        <div th:for="name">회사명: <input th:field="*{name}" id="addCompanyName"/></div>
+        <div th:for="title">광고제목: <input th:field="*{title}" id="addADName"/></div>
+        <div th:for="age">나이: <input th:field="*{age}" id="addAgeCondition"/></div>
+        <div th:for="gender">성별: <input th:field="*{gender}" id="addGenderCondition"/></div>
+        <div th:for="position">슬롯위치: <input th:field="*{slotPosition}" id="addSlot"/></div>
+        <div th:for="price">비용: <input th:field="*{price}" id="addCost"/></div>
+        <div th:for="start">시작일: <input th:field="*{startDate}" id="addDayStart"/></div>
+        <div th:for="end">만료일: <input th:field="*{endDate}" id="addDayEnd"/></div>
 
         <div>
-            <button id="closePopup" type="button" onclick="closePopup()">닫기</button>
-            <button id="confirmAdd" type="button" onclick="confirmAdd()">확인</button>
+            <button id="closePopup" type="submit">확인</button>
+            <button id="confirmAdd" type="submit">닫기</button>
         </div>
     </div>
-</div>
+</form>
 
 
 <!-- 제목 -->

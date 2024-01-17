@@ -28,8 +28,7 @@ public class AdController {
 	@ResponseBody
 	public AdList getAdApi(@RequestParam("page") int page) {
 		AdList adList = new AdList();
-		List<Ad> ads = adService.findAds();
-		adList.getAdList().addAll(ads);
+		adList.getAdList().addAll(adService.findAds());
 
 		return adList;
 	}
