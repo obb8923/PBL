@@ -10,25 +10,37 @@
 </head>
 
 <body>
+<div id="popupContainer" class="popup-container"></div>
 <!-- 레이어 팝업 ADD-->
-<form role="form" th:object="${adForm}" id="popupContainer" class="popup-container" action="/contract/create"
-      method="post">
-    <div class="popup">
-        <div th:for="name">회사명: <input th:field="*{name}" id="addCompanyName"/></div>
-        <div th:for="title">광고제목: <input th:field="*{title}" id="addADName"/></div>
-        <div th:for="age">나이: <input th:field="*{age}" id="addAgeCondition"/></div>
-        <div th:for="gender">성별: <input th:field="*{gender}" id="addGenderCondition"/></div>
-        <div th:for="position">슬롯위치: <input th:field="*{slotPosition}" id="addSlot"/></div>
-        <div th:for="price">비용: <input th:field="*{price}" id="addCost"/></div>
-        <div th:for="start">시작일: <input th:field="*{startDate}" id="addDayStart"/></div>
-        <div th:for="end">만료일: <input th:field="*{endDate}" id="addDayEnd"/></div>
-
-        <div>
-            <button id="closePopup" type="submit">확인</button>
-            <button id="confirmAdd" type="submit">닫기</button>
+    <div id ="popup" class="popup"  >
+        <div>회사명: <input id="addCompanyName" /></div>
+        <div>광고제목: <input id="addADName" /></div>
+        <div>광고조건: <input id="addADCondition" /></div>
+        <div>슬롯위치: <input id="addSlot"/></div>
+        <div>비용: <input id="addCost" /></div>
+        <div>시작일: <input id="addDayStart" /></div>
+        <div>만료일: <input id="addDayEnd" /></div>
+        <div class="buttonBox">
+            <div><button id="closePopup" type="button" onclick="closePopup('closePopup','popup')">닫기</button>
+            </div>
+                <form method="Post" action="/test">
+                    <button id="confirmAdd" type="submit" onclick="confirmAdd()">확인</button>
+            </form>
         </div>
     </div>
-</form>
+
+<div id ="popupDetail" class="popup">
+    <div>상세 페이지</div>
+    <div>회사명: </div>
+    <div>광고제목: </div>
+    <div>광고조건: </div>
+    <div>슬롯위치: </div>
+    <div>비용: </div>
+    <div>시작일: </div>
+    <div>만료일: </div>
+    <button id="closePopupDetail" type="button" onclick="closePopup('closePopupDetail','popupDetail')">닫기</button>
+</div>
+
 
 
 <!-- 제목 -->
@@ -44,7 +56,7 @@
             <option>title</option>
             <option>text</option>
         </select>
-        <input id="searchInput" type="text" value="여기에 쓰세요"/>
+        <input id="searchInput" type="text" value="여기에 쓰세요" />
         <button type="button">검색</button>
     </div>
     <!-- 테이블 -->
@@ -62,17 +74,18 @@
             </tr>
             </thead>
             <tbody>
-            <tr id="tableRow2" th:each="ad : ${ads}">
-                <td id="idx2"></td>
-                <td id="title2" th:text="${ad.id}"></td>
-                <td id="text2" th:text="${ad.topText}"></td>
-                <td id="EDT2"></td>
-                <td id="count2" th:text="${ad.price}"></td>
-                <td id="regdate2"></td>
+            <tr id="tableRow" th:each="ad : ${ads}">
+                <td id="idx" th:text="${ad.id}"></td>
+                <td id="title" ></td>
+                <td id="text" th:text="${ad.topText}"></td>
+                <td id="EDT"></td>
+                <td id="count" th:text="${ad.price}"></td>
+                <td id="regdate"></td>
                 <td id="action2">
-                    <button type="button">상세</button>
-                    <button type="button">수정</button>
-                    <button type="button">삭제</button>
+                    <button type="button" th:value="${ad.id}" onclick="clickDetail(value)">상세</button>
+                    <button type="button" onclick="clickModify()">수정</button>
+                    <button type="button" onclick="clickDelete()">삭제</button>
+
                 </td>
             </tr>
             </tbody>
