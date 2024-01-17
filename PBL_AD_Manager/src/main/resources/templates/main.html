@@ -13,14 +13,31 @@
 <div id="popupContainer" class="popup-container"></div>
 <!-- 레이어 팝업 ADD-->
 <form id="popup" class="popup" method="post" th:object="${adForm}" action="/contract/create">
-    <div>회사명: <input th:field="*{name}" id="addCompanyName"/></div>
+    <select name="CompanyId" id="addCompanyName" class="form-control">
+        <option value="">회사선택</option>
+        <option th:each="advertiser : ${advertisers}"
+                th:value="${advertiser.id}"
+                th:text="${advertiser.name}"/>
+    </select>
+    <!--    <div>회사명: <input th:field="*{name}" id="addCompanyName"/></div>-->
     <div>광고제목: <input th:field="*{title}" id="addADName"/></div>
+    <div>광고URL: <input th:field="*{url}" id="addADUrl"/></div>
+    <div>광고설명: <input th:field="*{content}" id="addADContent"/></div>
     <div>나이: <input th:field="*{age}" id="addAgeCondition"/></div>
-    <div>성별: <input th:field="*{gender}" id="addGenderCondition"/></div>
-    <div>슬롯위치: <input th:field="*{slotPosition}" id="addSlot"/></div>
+    <select name="Gender" , id="addGenderCondition">
+        <option value="">성별 선택</option>
+        <option value="male">남성</option>
+        <option value="female">여성</option>
+    </select>
+    <!--    <div>성별: <input th:field="*{gender}" id="addGenderCondition"/></div>-->
+    <!--    <div>슬롯위치: <input th:field="*{slotPosition}" id="addSlot"/></div>-->
+    <select name="Slot" , id="addSlot">
+        <option value="">slot 위치 선택</option>
+        <option value="top">top</option>
+        <option value="bottom">bottom</option>
+    </select>
     <div>비용: <input th:field="*{price}" id="addCost"/></div>
-    <div>시작일: <input th:field="*{startDate}" id="addDayStart"/></div>
-    <div>만료일: <input th:field="*{endDate}" id="addDayEnd"/></div>
+    <!--    <div>만료일: <input th:field="*{endDate}" id="addDayEnd"/></div>-->
     <div class="buttonBox">
         <div>
             <button id="closePopup" type="button" onclick="closePopup('closePopup','popup')">닫기</button>
@@ -76,7 +93,7 @@
             <tr id="tableRow" th:each="ad : ${ads}">
                 <td id="idx" th:text="${ad.id}"></td>
                 <td id="title"></td>
-                <td id="text" th:text="${ad.topText}"></td>
+                <td id="text" th:text="${ad.text}"></td>
                 <td id="EDT"></td>
                 <td id="count" th:text="${ad.price}"></td>
                 <td id="regdate"></td>

@@ -41,8 +41,7 @@ public class Contracts {
 	@JoinColumn(name = "ad_id")
 	private Ad ad;
 
-	@OneToOne
-	private TargetInf targetInf;
+	private Long targetId;
 
 	public void setAd(Ad ad) {
 		this.ad = ad;
@@ -54,12 +53,12 @@ public class Contracts {
 		advertiser.getContracts().add(this);
 	}
 
-	public static Contracts createContracts(int price, SlotPosition slotPosition, Ad ad, TargetInf targetInf,
+	public static Contracts createContracts(int price, SlotPosition slotPosition, Ad ad, Long targetId,
 		Advertiser advertiser) {
 		Contracts contracts = new Contracts();
 		contracts.setPrice(price);
 		contracts.setSlotPosition(slotPosition);
-		contracts.setTargetInf(targetInf);
+		contracts.setTargetId(targetId);
 		contracts.setAd(ad);
 		contracts.setAdvertiser(advertiser);
 		return contracts;

@@ -3,6 +3,7 @@ package team2.PBL_AD_Manager.repository;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import team2.PBL_AD_Manager.domain.adType.Ad;
 
 @Repository
 @RequiredArgsConstructor
+@Transactional
 public class AdRepository {
 
 	private final EntityManager em;
