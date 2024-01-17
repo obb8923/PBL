@@ -1,3 +1,26 @@
-<html>
-<div>hello world</div>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>이름</th>
+                <th>title</th>
+                <th>가격</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ad : ${ads}">
+                <td th:text="${ad.id}"></td>
+                <td th:text="${ad.topText}"></td>
+                <td th:text="${ad.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
 </html>

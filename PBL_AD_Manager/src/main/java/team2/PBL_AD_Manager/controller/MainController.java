@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -24,12 +23,8 @@ public class MainController {
 	private final AdService adService;
 
 	@GetMapping("/")
-	@ResponseBody
-	public String getAdApi(@RequestParam("page") int page) {
-		AdController.AdList adList = new AdController.AdList();
-		List<Ad> ads = adService.findAds();
-		adList.getAdList().addAll(ads);
-
+	public String getAdApi(Model model) {
+		model.addAttribute("ads", adService.findAds());
 		return "main";
 	}
 }
