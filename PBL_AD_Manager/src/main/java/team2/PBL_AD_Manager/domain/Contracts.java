@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -32,29 +34,34 @@ public class Contracts {
 
 	private LocalDateTime endDate;
 
-	@OneToOne
-	@JoinColumn(name = "slot_id")
-	private Slot slot;
+	@Enumerated(EnumType.STRING)
+	private SlotPosition slotPosition;
 
 	@OneToOne
 	@JoinColumn(name = "ad_id")
 	private Ad ad;
 
 	@OneToOne
-	@JoinColumn(name = "targetInf_id")
 	private TargetInf targetInf;
 
-	public void SetAd(Ad ad) {
+	public void setAd(Ad ad) {
 		this.ad = ad;
+		ad.setContracts(this);
 	}
 
-	public void SetAdvertiser(Advertiser advertiser) {
+	public void setAdvertiser(Advertiser advertiser) {
 		this.advertiser = advertiser;
 		advertiser.getContracts().add(this);
 	}
 
-	public void SetTragetInf(TargetInf targetInf) {
-		this.targetInf = targetInf;
-		targetInf.setContracts(this);
+	public static Contracts createContracts(int price, SlotPosition slotPosition, Ad ad, TargetInf targetInf,
+		Advertiser advertiser) {
+		Contracts contracts = new Contracts();
+		contracts.setPrice(price);
+		contracts.setSlotPosition(slotPosition);
+		contracts.setTargetInf(targetInf);
+		contracts.setAd(ad);
+		contracts.setAdvertiser(advertiser);
+		return contracts;
 	}
 }
