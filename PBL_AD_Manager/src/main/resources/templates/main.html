@@ -1,26 +1,81 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team 7</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+
+    <script src="/script/script.js"></script>
+</head>
+
 <body>
-<div class="container">
-    <div>
-        <table class="table table-striped">
+<!-- 레이어 팝업 ADD-->
+<div id="popupContainer" class="popup-container">
+    <div class="popup">
+        <div>회사명: <input id="addCompanyName"/></div>
+        <div>광고제목: <input id="addADName"/></div>
+        <div>광고조건: <input id="addADCondition"/></div>
+        <div>슬롯위치: <input id="addSlot"/></div>
+        <div>비용: <input id="addCost"/></div>
+        <div>시작일: <input id="addDayStart"/></div>
+        <div>만료일: <input id="addDayEnd"/></div>
+
+        <div>
+            <button id="closePopup" type="button" onclick="closePopup()">닫기</button>
+            <button id="confirmAdd" type="button" onclick="confirmAdd()">확인</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- 제목 -->
+<h2 class=mainTitle>AD Manager Platform - AD List</h2>
+<div class=levelBox>
+    <div class="buttonLevel">
+        <button id=ADDButton type="button" onclick="clickADDButton()">ADD</button>
+        <span></span>
+        <button id=ADTestButton>AD Test</button>
+    </div>
+    <div class="searchLevel">
+        <select id="searchSelect">
+            <option>title</option>
+            <option>text</option>
+        </select>
+        <input id="searchInput" type="text" value="여기에 쓰세요"/>
+        <button type="button">검색</button>
+    </div>
+    <!-- 테이블 -->
+    <div class="tableLevel">
+        <table id="ADTable">
             <thead>
             <tr>
-                <th>#</th>
-                <th>이름</th>
-                <th>title</th>
-                <th>가격</th>
+                <td>idx</td>
+                <td>title</td>
+                <td>text</td>
+                <td>Exposure datetime</td>
+                <td>count</td>
+                <td>regdate</td>
+                <td>action</td>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="ad : ${ads}">
-                <td th:text="${ad.id}"></td>
-                <td th:text="${ad.topText}"></td>
-                <td th:text="${ad.price}"></td>
+            <tr id="tableRow2" th:each="ad : ${ads}">
+                <td id="idx2"></td>
+                <td id="title2" th:text="${ad.id}"></td>
+                <td id="text2" th:text="${ad.topText}"></td>
+                <td id="EDT2"></td>
+                <td id="count2" th:text="${ad.price}"></td>
+                <td id="regdate2"></td>
+                <td id="action2">
+                    <button type="button">상세</button>
+                    <button type="button">수정</button>
+                    <button type="button">삭제</button>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
-</div> <!-- /container -->
+</div>
 </body>
 </html>
