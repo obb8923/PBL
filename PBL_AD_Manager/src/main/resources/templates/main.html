@@ -65,18 +65,45 @@
     <button id="closePopupDetail" type="button" onclick="closePopup('popupDetail')">닫기</button>
 </div>
 <!--레이어팝업 수정-->
-<div id ="popupModify" class="popup">
-    <div>상세 페이지</div>
-    <div>회사명: </div>
-    <div>광고제목: </div>
-    <div>광고조건: </div>
-    <div>슬롯위치: </div>
-    <div>비용: </div>
-    <div>시작일: </div>
-    <div>만료일: </div>
-    <button id="cancelPopupModify" type="button" onclick="closePopup('popupModify')">취소</button>
-    <button id="closePopupModify" type="button" onclick="closePopup('popupModify')">닫기</button>
-</div>
+<form id="popupModify" class="popup" method="post" th:object="${adForm}" action="">
+    <select name="CompanyId" id="modifyCompanyName" class="form-control">
+        <option value="" disabled="disabled" selected="selected">회사선택</option>
+        <option th:each="advertiser : ${advertisers}"
+                th:value="${advertiser.id}"
+                th:text="${advertiser.name}"/>
+    </select>
+    <!--    <div>회사명: <input th:field="*{name}" id="addCompanyName"/></div>-->
+    <div>광고제목: <input th:field="*{title}" id="modifyADName"placeholder="광고제목"/></div>
+    <div>광고URL: <input th:field="*{url}" id="modifyADUrl"/></div>
+    <div>광고설명: <input th:field="*{content}" id="modifyADContent"/></div>
+    <div>나이: <input th:field="*{age}" id="modifyAgeCondition"/></div>
+    <select name="Gender" , id="modifyGenderCondition">
+        <option value="" disabled="disabled" selected="selected">성별 선택</option>
+        <option value="male">남성</option>
+        <option value="female">여성</option>
+    </select>
+    <!--    <div>성별: <input th:field="*{gender}" id="addGenderCondition"/></div>-->
+    <!--    <div>슬롯위치: <input th:field="*{slotPosition}" id="addSlot"/></div>-->
+    <select name="Slot" , id="modifySlot">
+        <option value="" disabled="disabled" selected="selected">slot 위치 선택</option>
+        <option value="top">top</option>
+        <option value="bottom">bottom</option>
+    </select>
+    <div>노출 횟수: <input th:field="*{price}" id="modifyCost"/></div>
+    <div>만료일: <input type="date"/></div>
+    <!--    <div>만료일: <input th:field="*{endDate}" id="addDayEnd"/></div>-->
+    <div class="buttonBox">
+        <div>
+            <script>function closePopup2(popupId) {
+                closePopupContainer();
+                document.getElementById(popupId).style.display = 'none';
+            }
+            </script>
+            <button  type="button" onclick="closePopup2('popupModify')">닫기</button>
+            <button  type="submit" onclick="closePopup2('popupModify')">확인</button>
+        </div>
+    </div>
+</form>
 <!--레이어팝업 삭제-->
 <div id ="popupDelete" class="popup">
     <div>삭제하시겠습니까? </div>
