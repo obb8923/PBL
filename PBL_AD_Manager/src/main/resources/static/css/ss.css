@@ -65,7 +65,9 @@ body {
 }
 
 #ADDButton {
+    /*
     position: relative;
+    */
     border: 0;
     height: 30px;
     border-radius: 10px;
@@ -80,7 +82,9 @@ body {
 }
 
 #ADTestButton {
+    /*
     position: relative;
+    */
     border: 0;
     height: 30px;
     border-radius: 10px;

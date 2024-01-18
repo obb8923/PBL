@@ -157,28 +157,48 @@
     <div class="paginationLevel">
         <span></span>
         <div>
-<!--            <form action="/1">-->
-<!--                <button type="submit">처음으로</button>-->
-<!--            </form>-->
+            <form action="/">
+                <button type="submit"><</button>
+            </form>
         <form action="/1">
             <button type="submit">1</button>
         </form>
         <form action="/2">
             <button type="submit">2</button>
         </form>
-        <form id="toEndPage" th:value="${totalNum}" action="/">
-            <script>
-                var endPage = document.getElementById("toEndPage").value/5;
+            <form action="/3">
+                <button type="submit">3</button>
+            </form>
+            <form action="/4">
+                <button type="submit">4</button>
+            </form>
+            <form action="/5">
+                <button type="submit">5</button>
+            </form>
+            <form action="/">
+                <button type="submit">></button>
+            </form>
+            <form id="toEndPage" th:action="@{/}">
+                <input type="hidden" th:field="*{totalNum}" />
+                <button type="submit">마지막으로</button>
+            </form>
+            <script th:inline="javascript">
+                var totalNum = [[${totalNum}]]; // Assuming totalNum is a number
+                console.log(totalNum);
+                var endPage = Math.floor(totalNum / 5)+1;
                 console.log(endPage);
-
-                document.querySelector('form').action = '/' + endPage;
+                document.getElementById("toEndPage").action = '/' + endPage;
             </script>
+<!--        <form id="toEndPage" th:value="${totalNum}" action="/">-->
+<!--            <script>-->
+<!--                var endPage = document.getElementById("toEndPage").value/5;-->
+<!--                document.querySelector('form').action = '/' + endPage;-->
+<!--            </script>-->
 
-            <button type="submit">마지막으로</button>
-        </form>
+<!--            <button type="submit">마지막으로</button>-->
+<!--        </form>-->
         </div>
         <span></span>
-
     </div>
 </div>
 
