@@ -1,6 +1,7 @@
 package team2.PBL_AD_Manager.controller;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,12 +60,13 @@ public class MainController {
 		String url = adForm.getUrl();
 		String content = adForm.getContent();
 		SlotPosition slotPosition = (slot == "top") ? SlotPosition.top : SlotPosition.bottom;
-		LocalDateTime startDate = LocalDateTime.now();
-		// LocalDateTime endDate = adForm.getEndDate();
+		String startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		String endDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 		Image imageAd = Image.createImage(url, price, content);
 		adRepository.saveAd(imageAd);
 		Advertiser advertiser = advertiserRepository.findAdvertiser(id);
-		Contracts contracts = Contracts.createContracts(price, slotPosition, imageAd, 1L, advertiser);
+		Contracts contracts = Contracts.createContracts(price, slotPosition, imageAd, 1L, advertiser, startDate,
+			endDate);
 
 		contractsRepository.saveContract(contracts);
 

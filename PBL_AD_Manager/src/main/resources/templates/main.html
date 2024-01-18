@@ -14,7 +14,7 @@
 <!-- 레이어 팝업 ADD-->
 <form id="popup" class="popup" method="post" th:object="${adForm}" action="/contract/create">
     <select name="CompanyId" id="addCompanyName" class="form-control">
-        <option value="">회사선택</option>
+        <option value="" disabled="disabled" selected="selected">회사선택</option>
         <option th:each="advertiser : ${advertisers}"
                 th:value="${advertiser.id}"
                 th:text="${advertiser.name}"/>
@@ -25,18 +25,18 @@
     <div>광고설명: <input th:field="*{content}" id="addADContent"/></div>
     <div>나이: <input th:field="*{age}" id="addAgeCondition"/></div>
     <select name="Gender" , id="addGenderCondition">
-        <option value="">성별 선택</option>
+        <option value="" disabled="disabled" selected="selected">성별 선택</option>
         <option value="male">남성</option>
         <option value="female">여성</option>
     </select>
     <!--    <div>성별: <input th:field="*{gender}" id="addGenderCondition"/></div>-->
     <!--    <div>슬롯위치: <input th:field="*{slotPosition}" id="addSlot"/></div>-->
     <select name="Slot" , id="addSlot">
-        <option value="">slot 위치 선택</option>
+        <option value="" disabled="disabled" selected="selected">slot 위치 선택</option>
         <option value="top">top</option>
         <option value="bottom">bottom</option>
     </select>
-    <div>비용: <input th:field="*{price}" id="addCost"/></div>
+    <div>노출 횟수: <input th:field="*{price}" id="addCost"/></div>
     <!--    <div>만료일: <input th:field="*{endDate}" id="addDayEnd"/></div>-->
     <div class="buttonBox">
         <div>
@@ -81,7 +81,7 @@
             <thead>
             <tr>
                 <td>idx</td>
-                <td>title</td>
+                <td>advertiser</td>
                 <td>text</td>
                 <td>Exposure datetime</td>
                 <td>count</td>
@@ -92,11 +92,12 @@
             <tbody>
             <tr id="tableRow" th:each="ad : ${ads}">
                 <td id="idx" th:text="${ad.id}"></td>
-                <td id="title"></td>
+                <td id="advertiser" th:text="${ad.getContracts().getAdvertiser().getName()}"></td>
                 <td id="text" th:text="${ad.text}"></td>
-                <td id="EDT"></td>
+                <td id="EDT"><span th:text="${ad.getContracts().getStartDate()}"/> ~ <span
+                        th:text="${ad.getContracts().getEndDate()}"/></td>
                 <td id="count" th:text="${ad.price}"></td>
-                <td id="regdate"></td>
+                <td id="regdate" th:text="${ad.getContracts().getStartDate()}"></td>
                 <td id="action2">
                     <button type="button" th:value="${ad.id}" onclick="clickDetail(value)">상세</button>
                     <button type="button" onclick="clickModify()">수정</button>
