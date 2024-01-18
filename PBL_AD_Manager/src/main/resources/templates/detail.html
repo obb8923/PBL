@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team 2</title>
+</head>
+<body>
+<h1>광고 정보</h1>
+<tr id="tableRow1" th:object="${ad}">
+    <img th:src="${ad.getUrl()}" alt="이미지 설명">
+    <td id="idx2" th:text="${ad.getClickCount()}"></td>
+    <td id="idx3" th:text="${ad.getId()}"></td>
+    <td id="idx4" th:text="${ad.getText()}"></td>
+</tr>
+<h1>계약 내용</h1>
+<tr id="tableRow2" th:object="${contract}">
+    <td id="idx5" th:text="${contract.getEndDate()}"></td>
+    <td id="idx6" th:text="${contract.getStartDate()}"></td>
+    <td id="idx7" th:text="${contract.getPrice()}"></td>
+    <td id="idx8" th:text="${contract.getSlotPosition()}"></td>
+    <td id="idx9" th:text="${contract.getTargetId()}"></td>
+</tr>
+<h1>광고주</h1>
+<tr id="tableRow3" th:object="${advertiser}">
+    <td id="idx10" th:text="${advertiser.getName()}"></td>
+</tr>
+</body>
+</html>

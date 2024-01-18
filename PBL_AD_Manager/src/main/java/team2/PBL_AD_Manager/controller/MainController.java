@@ -127,7 +127,7 @@ public class MainController {
 		System.out.println(advertiser.getName()); // 조회까진 됨.
 		System.out.println(targetArr[0] + " / " + targetArr[1]);
 
-		return "main";
+		return "detail";
 	}
 
 	@PostMapping("/ad/edit")
