@@ -65,18 +65,46 @@
     <button id="closePopupDetail" type="button" onclick="closePopup('popupDetail')">닫기</button>
 </div>
 <!--레이어팝업 수정-->
-<div id="popupModify" class="popup">
-    <div>상세 페이지</div>
-    <div>회사명:</div>
-    <div>광고제목:</div>
-    <div>광고조건:</div>
-    <div>슬롯위치:</div>
-    <div>비용:</div>
-    <div>시작일:</div>
-    <div>만료일:</div>
-    <button id="cancelPopupModify" type="button" onclick="closePopup('popupModify')">취소</button>
-    <button id="closePopupModify" type="button" onclick="closePopup('popupModify')">닫기</button>
-</div>
+
+<form id="popupModify" class="popup" method="post" th:object="${adForm}" action="">
+    <select name="CompanyId" id="modifyCompanyName" class="form-control">
+        <option value="" disabled="disabled" selected="selected">회사선택</option>
+        <option th:each="advertiser : ${advertisers}"
+                th:value="${advertiser.id}"
+                th:text="${advertiser.name}"/>
+    </select>
+    <!--    <div>회사명: <input th:field="*{name}" id="addCompanyName"/></div>-->
+    <div>광고제목: <input th:field="*{title}" id="modifyADName"placeholder="광고제목"/></div>
+    <div>광고URL: <input th:field="*{url}" id="modifyADUrl"/></div>
+    <div>광고설명: <input th:field="*{content}" id="modifyADContent"/></div>
+    <div>나이: <input th:field="*{age}" id="modifyAgeCondition"/></div>
+    <select name="Gender" , id="modifyGenderCondition">
+        <option value="" disabled="disabled" selected="selected">성별 선택</option>
+        <option value="male">남성</option>
+        <option value="female">여성</option>
+    </select>
+    <!--    <div>성별: <input th:field="*{gender}" id="addGenderCondition"/></div>-->
+    <!--    <div>슬롯위치: <input th:field="*{slotPosition}" id="addSlot"/></div>-->
+    <select name="Slot" , id="modifySlot">
+        <option value="" disabled="disabled" selected="selected">slot 위치 선택</option>
+        <option value="top">top</option>
+        <option value="bottom">bottom</option>
+    </select>
+    <div>노출 횟수: <input th:field="*{price}" id="modifyCost"/></div>
+    <div>만료일: <input type="date"/></div>
+    <!--    <div>만료일: <input th:field="*{endDate}" id="addDayEnd"/></div>-->
+    <div class="buttonBox">
+        <div>
+            <script>function closePopup2(popupId) {
+                closePopupContainer();
+                document.getElementById(popupId).style.display = 'none';
+            }
+            </script>
+            <button  type="button" onclick="closePopup2('popupModify')">닫기</button>
+            <button  type="submit" onclick="closePopup2('popupModify')">확인</button>
+        </div>
+    </div>
+</form>
 <!--레이어팝업 삭제-->
 <div id="popupDelete" class="popup">
     <div>삭제하시겠습니까?</div>
@@ -158,10 +186,15 @@
 
     </div>
     <div class="paginationLevel">
+
         <span></span>
+
         <div>
-            <form action="/">
-                <button type="submit"><</button>
+<!--            <form name="toEx" action="/">-->
+<!--                <button id="toEx" type="submit" ><</button>-->
+<!--            </form>-->
+            <form name="exexForm" action="/">
+                <button id="exexButton" type="submit"></button>
             </form>
             <form action="/1">
                 <button type="submit">1</button>
@@ -171,12 +204,14 @@
             </form>
             <form action="/3">
                 <button type="submit">3</button>
+            <form name="exForm" action="/">
+                <button id="exButton" type="submit"></button>
             </form>
-            <form action="/4">
-                <button type="submit">4</button>
+            <form name="curForm"  action="/" th:value="${pageNum}">
+                <button id="curButton" type="submit"></button>
             </form>
-            <form action="/5">
-                <button type="submit">5</button>
+            <form   name="postForm" action="/">
+                <button id="postButton" type="submit"></button>
             </form>
             <form action="/">
                 <button type="submit">></button>
@@ -184,22 +219,37 @@
             <form id="toEndPage" th:action="@{/}">
                 <input type="hidden" th:field="*{totalNum}"/>
                 <button type="submit">마지막으로</button>
+            <form  name="postpostForm" action="/">
+                <button id="postpostButton" type="submit"></button>
             </form>
+<!--            <form name="toPost" action="/">-->
+<!--                <button id="toPost" type="submit">></button>-->
+<!--            </form>-->
+<!--            <form id="toEndPage" th:action="@{/}">-->
+<!--                <input type="hidden" th:field="*{totalNum}" />-->
+<!--                <button type="submit">마지막으로</button>-->
+<!--            </form>-->
             <script th:inline="javascript">
                 var totalNum = [[${totalNum}]]; // Assuming totalNum is a number
                 console.log(totalNum);
                 var endPage = Math.floor(totalNum / 5) + 1;
                 console.log(endPage);
                 document.getElementById("toEndPage").action = '/' + endPage;
+                let totalNum = [[${totalNum}]];
+                let endPage = Math.floor(totalNum / 5)+1;
+                let curPage = [[${pageNum}]];
+                //document.getElementById("toEndPage").action = '/' + endPage;
+                pageButton(endPage,curPage);
             </script>
             <!--        <form id="toEndPage" th:value="${totalNum}" action="/">-->
             <!--            <script>-->
             <!--                var endPage = document.getElementById("toEndPage").value/5;-->
             <!--                document.querySelector('form').action = '/' + endPage;-->
             <!--            </script>-->
-
             <!--            <button type="submit">마지막으로</button>-->
             <!--        </form>-->
+<!--            <button type="submit">마지막으로</button>-->
+<!--        </form>-->
         </div>
         <span></span>
     </div>

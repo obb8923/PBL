@@ -21,6 +21,7 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+
 .popup {
     display: none;
     position: absolute;
@@ -50,6 +51,7 @@ body {
 .levelBox {
     align-items: center;
     flex-grow: 1;
+    width: 80%;
 }
 
 .buttonLevel {
@@ -62,7 +64,6 @@ body {
 .buttonLevel > span {
     margin: 10px;
 }
-
 #ADDButton {
     flex-grow: 1;
 }
@@ -129,3 +130,14 @@ body {
     display: flex;
     flex-flow: column;
 }
+#popupAdd{
+    display: flex;
+    flex-flow:column nowrap;
+}
+#popupAdd select{
+    flex-grow: 1;
+}
+#popupAdd input{
+    flex-grow:1;
+}
+
