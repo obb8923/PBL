@@ -7,6 +7,8 @@ import lombok.Setter;
 @Setter
 public class AdForm {
 
+	private Long adId;
+
 	private String title;
 
 	private int age;

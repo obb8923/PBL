@@ -82,4 +82,3 @@ function openPopup(popupId) {
 function toDetail(adId){
     document.detailForm.action='/detail/'+adId;
 }
-
