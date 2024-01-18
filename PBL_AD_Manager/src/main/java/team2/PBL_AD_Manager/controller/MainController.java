@@ -90,6 +90,7 @@ public class MainController {
 		}
 		// adForm 객체를 모델에 추가
 		AdForm adForm = new AdForm(); // AdForm 클래스의 인스턴스 생성
+		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("totalNum", totalNum);
 		model.addAttribute("ads", adList);
 		model.addAttribute("advertisers", advertiserRepository.findAll());

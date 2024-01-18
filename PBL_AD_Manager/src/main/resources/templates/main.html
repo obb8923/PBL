@@ -155,39 +155,42 @@
 
     </div>
     <div class="paginationLevel">
+
         <span></span>
+
         <div>
-            <form action="/">
-                <button type="submit"><</button>
+<!--            <form name="toEx" action="/">-->
+<!--                <button id="toEx" type="submit" ><</button>-->
+<!--            </form>-->
+            <form name="exexForm" action="/">
+                <button id="exexButton" type="submit"></button>
             </form>
-        <form action="/1">
-            <button type="submit">1</button>
-        </form>
-        <form action="/2">
-            <button type="submit">2</button>
-        </form>
-            <form action="/3">
-                <button type="submit">3</button>
+            <form name="exForm" action="/">
+                <button id="exButton" type="submit"></button>
             </form>
-            <form action="/4">
-                <button type="submit">4</button>
+            <form name="curForm"  action="/" th:value="${pageNum}">
+                <button id="curButton" type="submit"></button>
             </form>
-            <form action="/5">
-                <button type="submit">5</button>
+            <form   name="postForm" action="/">
+                <button id="postButton" type="submit"></button>
             </form>
-            <form action="/">
-                <button type="submit">></button>
+            <form  name="postpostForm" action="/">
+                <button id="postpostButton" type="submit"></button>
             </form>
-            <form id="toEndPage" th:action="@{/}">
-                <input type="hidden" th:field="*{totalNum}" />
-                <button type="submit">마지막으로</button>
-            </form>
+<!--            <form name="toPost" action="/">-->
+<!--                <button id="toPost" type="submit">></button>-->
+<!--            </form>-->
+<!--            <form id="toEndPage" th:action="@{/}">-->
+<!--                <input type="hidden" th:field="*{totalNum}" />-->
+<!--                <button type="submit">마지막으로</button>-->
+<!--            </form>-->
             <script th:inline="javascript">
-                var totalNum = [[${totalNum}]]; // Assuming totalNum is a number
-                console.log(totalNum);
-                var endPage = Math.floor(totalNum / 5)+1;
-                console.log(endPage);
-                document.getElementById("toEndPage").action = '/' + endPage;
+                let totalNum = [[${totalNum}]];
+                let endPage = Math.floor(totalNum / 5)+1;
+                let curPage = [[${pageNum}]];
+                //document.getElementById("toEndPage").action = '/' + endPage;
+                pageButton(endPage,curPage);
+
             </script>
 <!--        <form id="toEndPage" th:value="${totalNum}" action="/">-->
 <!--            <script>-->
@@ -197,6 +200,7 @@
 
 <!--            <button type="submit">마지막으로</button>-->
 <!--        </form>-->
+
         </div>
         <span></span>
     </div>
