@@ -41,12 +41,7 @@ public class MainController {
 
 	@GetMapping("/")
 	public String getAdApi(Model model) {
-		List<Advertiser> advertiserList = advertiserRepository.findAll();
-		model.addAttribute("advertisers", advertiserList);
-
-		model.addAttribute("ads", adService.findAds());
-		model.addAttribute("adForm", new AdForm());
-		return "main";
+		return "redirect:/1";
 	}
 
 	@PostMapping("/contract/create")
