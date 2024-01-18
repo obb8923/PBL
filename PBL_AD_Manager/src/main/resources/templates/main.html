@@ -11,6 +11,7 @@
 
 <body>
 <div id="popupContainer" class="popup-container"></div>
+
 <!-- 레이어 팝업 ADD-->
 <form id="popupAdd" class="popup" method="post" th:object="${adForm}" action="/contract/create">
     <select name="CompanyId" id="addCompanyName" class="form-control">
@@ -150,7 +151,23 @@
             </tr>
             </tbody>
         </table>
+        <!-- 페이지네이션 버튼 -->
+
+    </div>
+    <div class="paginationLevel">
+        <span></span>
+        <div>
+        <form action="/1">
+            <button type="submit">1</button>
+        </form>
+        <form action="/2">
+            <button type="submit">2</button>
+        </form>
+        </div>
+        <span></span>
+
     </div>
 </div>
+
 </body>
 </html>

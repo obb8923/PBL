@@ -168,3 +168,14 @@ body {
     top: 10%;
     left: 10%;
 }
+.paginationLevel{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+.paginationLevel>span{
+    flex-grow: 1;
+}
+.paginationLevel form{
+    margin:0;display:inline;height:20px; float:left;
+}
