@@ -110,24 +110,24 @@ public class MainController {
 		AdForm adForm = new AdForm(); // AdForm 클래스의 인스턴스 생성
 
 		// ad 객체로 contracts, target info 가져오기
-		Contracts Contracts = ad.getContracts();
-		Advertiser advertiser = Contracts.getAdvertiser();
+		Contracts contract = ad.getContracts();
+		Advertiser advertiser = contract.getAdvertiser();
 		TargetInf targetInf = new TargetInf();
-		int[] targetArr = targetInf.TargetToStr(Contracts.getTargetId());
+		int[] targetArr = targetInf.TargetToStr(contract.getTargetId());
 
-		model.addAttribute("adDetail", ad);
-		model.addAttribute("adContracts", Contracts);
-		model.addAttribute("adAdvertiser", advertiser);
+		model.addAttribute("ad", ad);
+		model.addAttribute("contract", contract);
+		model.addAttribute("advertiser", advertiser);
 		model.addAttribute("adForm", adForm);
 
 		// 출력 test
 		System.out.println("---------------^^^^ ADdetail() ^^^-----------------");
-		System.out.println(Contracts.getStartDate()); // 조회까진 됨.
+		System.out.println(contract.getStartDate()); // 조회까진 됨.
 		System.out.println(ad.getPrice()); // 조회까진 됨.
 		System.out.println(advertiser.getName()); // 조회까진 됨.
 		System.out.println(targetArr[0] + " / " + targetArr[1]);
 
-		return "main";
+		return "detail";
 	}
 
 	@PostMapping("/ad/{adId}/edit")
