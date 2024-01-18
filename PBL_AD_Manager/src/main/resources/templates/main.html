@@ -166,7 +166,16 @@
         <form action="/2">
             <button type="submit">2</button>
         </form>
+        <form id="toEndPage" th:value="${totalNum}" action="/">
+            <script>
+                var endPage = document.getElementById("toEndPage").value/5;
+                console.log(endPage);
 
+                document.querySelector('form').action = '/' + endPage;
+            </script>
+
+            <button type="submit">마지막으로</button>
+        </form>
         </div>
         <span></span>
 

@@ -82,6 +82,7 @@ public class MainController {
 	public String pagination(@PathVariable("pageNum") int pageNum, Model model) throws Exception {
 		Long totalNum = adRepository.findTotalNumber();
 		List<Ad> adList = adService.findAdsByPage(pageNum);
+
 		System.out.println("--------------------------------");
 		System.out.println(pageNum);
 		for (Ad ad : adList) {
