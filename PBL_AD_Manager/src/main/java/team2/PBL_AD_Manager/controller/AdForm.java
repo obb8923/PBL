@@ -1,7 +1,5 @@
 package team2.PBL_AD_Manager.controller;
 
-import java.time.LocalDateTime;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +17,6 @@ public class AdForm {
 
 	private String content;
 
-	private LocalDateTime endDate;
+	private String endDate;
 
 }

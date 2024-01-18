@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,7 +58,12 @@ public class MainController {
 	@PostMapping("/contract/create")
 	public String create(@RequestParam("CompanyId") Long id, @RequestParam("Slot") String slot,
 		@RequestParam("Gender") String inputGender,
-		AdForm adForm) {
+		AdForm adForm, BindingResult result) {
+
+		// if (result.hasErrors()) {
+		// 	return "/";
+		// }
+
 		Gender gender = (inputGender == "male") ? Gender.male : Gender.female;
 		int age = adForm.getAge();
 		int price = adForm.getPrice();
@@ -65,9 +71,9 @@ public class MainController {
 		String url = adForm.getUrl();
 		String content = adForm.getContent();
 		SlotPosition slotPosition = (slot == "top") ? SlotPosition.top : SlotPosition.bottom;
-		String startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-		String endDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-		Image imageAd = Image.createImage(url, price, content);
+		String startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		String endDate = adForm.getEndDate();
+		Image imageAd = Image.createImage(url, price, title);
 		Long targetId = targetService.findId(age, gender);
 		adRepository.saveAd(imageAd);
 		Advertiser advertiser = advertiserRepository.findAdvertiser(id);
