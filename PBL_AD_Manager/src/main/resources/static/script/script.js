@@ -17,7 +17,6 @@
 //         toPostButton.style.display = 'block';
 //     }
 // }
-
 function pageButton(totalNum,pageNum){
     let currentPage = pageNum;
     const curButton = document.getElementById("curButton")

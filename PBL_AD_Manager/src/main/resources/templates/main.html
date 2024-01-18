@@ -176,12 +176,10 @@
                 <td id="regdate" th:text="${ad.getContracts().getStartDate()}"></td>
                 <td id="action">
                     <form name="detailForm" action="/">
-                    <button type="submit">상세</button>
+                    <button name ="detailButton">
+                        <a th:href="@{/detail/{id}(id=${ad.id})}" class="button">상세</a>
+                    </button>
                     </form>
-                    <script>
-                        const adId=[[${ad.id}]];
-                        toDetail(adId);
-                    </script>
                     <button type="button" onclick="openPopup('popupModify')">수정</button>
                     <button type="button" onclick="openPopup('popupDelete')">삭제</button>
 
