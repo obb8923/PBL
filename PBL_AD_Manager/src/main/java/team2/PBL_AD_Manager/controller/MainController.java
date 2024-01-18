@@ -134,12 +134,29 @@ public class MainController {
 	public String update(Model model,@RequestParam("CompanyId") Long id, @RequestParam("Slot") String slot,
 		@RequestParam("Gender") String inputGender,
 		AdForm adForm) {
-		Long adId = adForm.getAdId();
-		System.out.println("adId = " + adId);
-		Image findImage = (Image)adService.findOne(adId);
+		// Long adId = adForm.getAdId();
+		// System.out.println("adId = " + adId);
+		// Image findImage = (Image)adService.findOne(adId);
 
-		return "main";
+		Gender gender = (inputGender == "male") ? Gender.male : Gender.female;
+		int age = adForm.getAge();
+		int price = adForm.getPrice();
+		String title = adForm.getTitle();
+		String url = adForm.getUrl();
+		String content = adForm.getContent();
+		SlotPosition slotPosition = (slot == "top") ? SlotPosition.top : SlotPosition.bottom;
+		String startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		String endDate = adForm.getEndDate();
+		Image imageAd = Image.createImage(url, price, title);
+		Long targetId = targetService.findId(age, gender);
+		adRepository.saveAd(imageAd);
+		Advertiser advertiser = advertiserRepository.findAdvertiser(id);
+		Contracts contracts = Contracts.createContracts(price, slotPosition, imageAd, targetId, advertiser, startDate,
+			endDate);
 
+		contractsRepository.saveContract(contracts);
+
+		return "redirect:/";
 	}
 
 }
