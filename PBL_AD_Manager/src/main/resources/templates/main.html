@@ -68,6 +68,7 @@
 <!--레이어팝업 수정-->
 
 <form id="popupModify" class="popup" method="post" th:object="${adForm}" action="">
+    <input type="hidden" th:value="${adId}"/>
     <select name="CompanyId" id="modifyCompanyName" class="form-control">
         <option value="" disabled="disabled" selected="selected">회사선택</option>
         <option th:each="advertiser : ${advertisers}"
