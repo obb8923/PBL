@@ -34,11 +34,12 @@ public class AdRepository {
 		return em.createQuery(jpql, Long.class).getSingleResult();
 	}
 
-	public List<Ad> findAllWithPagination(int startIdx, int entIdx) {
-		String jpql = "SELECT a FROM Ad a WHERE a.id >= :startIdx AND a.id <= :entIdx";
+	public List<Ad> findAllWithPagination(int startIdx, int endIdx) {
+		String jpql = "SELECT a FROM Ad a WHERE a.id >= :startIdx AND a.id <= :endIdx ORDER BY a.id DESC"; // 내림차순 정렬
+
 		return em.createQuery(jpql, Ad.class)
 			.setParameter("startIdx", startIdx)
-			.setParameter("entIdx", entIdx)
+			.setParameter("endIdx", endIdx)
 			.getResultList();
 	}
 

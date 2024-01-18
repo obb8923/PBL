@@ -24,6 +24,7 @@ import team2.PBL_AD_Manager.repository.AdRepository;
 import team2.PBL_AD_Manager.repository.AdvertiserRepository;
 import team2.PBL_AD_Manager.repository.ContractsRepository;
 import team2.PBL_AD_Manager.service.AdService;
+import team2.PBL_AD_Manager.service.TargetService;
 
 @Controller
 @RequiredArgsConstructor
@@ -33,6 +34,7 @@ public class MainController {
 	private final AdService adService;
 	private final ContractsRepository contractsRepository;
 	private final AdRepository adRepository;
+	private final TargetService targetService;
 
 	@Getter
 	static class AdList {
@@ -41,7 +43,14 @@ public class MainController {
 
 	@GetMapping("/")
 	public String getAdApi(Model model) {
-		return "redirect:/1";
+		if (adRepository.findTotalNumber() == 0) {
+			model.addAttribute("advertisers", advertiserRepository.findAll());
+			AdForm adForm = new AdForm(); // AdForm 클래스의 인스턴스 생성
+			model.addAttribute("adForm", adForm);
+			return "main";
+		} else {
+			return "redirect:/1";
+		}
 	}
 
 	@PostMapping("/contract/create")
@@ -58,9 +67,10 @@ public class MainController {
 		String startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 		String endDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 		Image imageAd = Image.createImage(url, price, content);
+		Long targetId = targetService.findId(age, gender);
 		adRepository.saveAd(imageAd);
 		Advertiser advertiser = advertiserRepository.findAdvertiser(id);
-		Contracts contracts = Contracts.createContracts(price, slotPosition, imageAd, 1L, advertiser, startDate,
+		Contracts contracts = Contracts.createContracts(price, slotPosition, imageAd, targetId, advertiser, startDate,
 			endDate);
 
 		contractsRepository.saveContract(contracts);
@@ -70,6 +80,7 @@ public class MainController {
 
 	@GetMapping("/{pageNum}")
 	public String pagination(@PathVariable("pageNum") int pageNum, Model model) throws Exception {
+		Long totalNum = adRepository.findTotalNumber();
 		List<Ad> adList = adService.findAdsByPage(pageNum);
 		System.out.println("--------------------------------");
 		System.out.println(pageNum);
@@ -78,6 +89,7 @@ public class MainController {
 		}
 		// adForm 객체를 모델에 추가
 		AdForm adForm = new AdForm(); // AdForm 클래스의 인스턴스 생성
+		model.addAttribute("totalNum", totalNum);
 		model.addAttribute("ads", adList);
 		model.addAttribute("adForm", adForm);
 

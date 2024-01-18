@@ -8,11 +8,14 @@ import team2.PBL_AD_Manager.domain.Gender;
 
 @Service
 @RequiredArgsConstructor
-public class targetService {
+public class TargetService {
 	private final EntityManager em;
 
 	public Long findId(int age, Gender gender) {
+		System.out.println("age = " + age);
+		System.out.println("gender = " + gender);
 		return (Long)em.createQuery("SELECT t.id FROM TargetInf t WHERE t.age = :age AND t.gender = :gender")
+			.setParameter("age", age).setParameter("gender", gender)
 			.getSingleResult();
 	}
 }
