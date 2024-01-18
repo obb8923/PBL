@@ -176,8 +176,8 @@
                 <td id="regdate" th:text="${ad.getContracts().getStartDate()}"></td>
                 <td id="action">
                     <form name="detailForm" action="/">
-                    <button name ="detailButton">
-                        <a th:href="@{/detail/{id}(id=${ad.id})}" class="button">상세</a>
+                    <button name ="detailButton" class="button">
+                        <a id="detailLink" th:href="@{/detail/{id}(id=${ad.id})}" class="">상세</a>
                     </button>
 
                     </form>
@@ -193,9 +193,6 @@
     <div class="paginationLevel">
         <span></span>
         <div>
-            <!--            <form name="toEx" action="/">-->
-            <!--                <button id="toEx" type="submit" ><</button>-->
-            <!--            </form>-->
             <form name="exexForm" action="/">
                 <button id="exexButton" type="submit"></button>
             </form>
@@ -211,13 +208,6 @@
             <form  name="postpostForm" action="/">
                 <button id="postpostButton" type="submit"></button>
             </form>
-            <!--            <form name="toPost" action="/">-->
-            <!--                <button id="toPost" type="submit">></button>-->
-            <!--            </form>-->
-            <!--            <form id="toEndPage" th:action="@{/}">-->
-            <!--                <input type="hidden" th:field="*{totalNum}" />-->
-            <!--                <button type="submit">마지막으로</button>-->
-            <!--            </form>-->
             <script th:inline="javascript">
                 let totalNum = [[${totalNum}]];
                 let endPage = Math.floor(totalNum / 5)+1;
@@ -228,17 +218,7 @@
                 }else{
                     pageButton(endPage,curPage);
                 }
-
             </script>
-            <!--        <form id="toEndPage" th:value="${totalNum}" action="/">-->
-            <!--            <script>-->
-            <!--                var endPage = document.getElementById("toEndPage").value/5;-->
-            <!--                document.querySelector('form').action = '/' + endPage;-->
-            <!--            </script>-->
-
-            <!--            <button type="submit">마지막으로</button>-->
-            <!--        </form>-->
-
         </div>
         <span></span>
     </div>

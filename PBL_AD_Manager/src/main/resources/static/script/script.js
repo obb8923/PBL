@@ -78,7 +78,3 @@ function openPopup(popupId) {
     openPopupContainer();
     document.getElementById(popupId).style.display = 'flex';
 }
-
-function toDetail(adId){
-    document.detailForm.action='/detail/'+adId;
-}

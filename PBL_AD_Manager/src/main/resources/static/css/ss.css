@@ -80,6 +80,11 @@ body {
     top: 2px;
     background: #2e2e2e;
 }
+#detailLink{
+    color: inherit;
+    text-decoration: none;
+}
+
 .action{
     display:flex;
 }
