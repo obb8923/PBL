@@ -7,7 +7,7 @@ body {
     align-items: center;
 }
 .mainTitle {
-    margin-top: 100px;
+    margin-top: 70px;
     text-align: center;
     flex-grow: 0;
 }
@@ -61,14 +61,39 @@ body {
     margin-bottom: 20px;
 }
 .buttonLevel > span {
-    margin: 10px;
+    margin: 5px;
 }
+
 #ADDButton {
+    position: relative;
+    border: 0;
+    height: 30px;
+    border-radius: 10px;
+    color: white;
     flex-grow: 1;
+    background: #3a3a3a;
+    transition: background 0.3s, box-shadow 0.3s;
 }
+#ADDButton:active {
+    top: 2px;
+    background: #2e2e2e;
+}
+
 #ADTestButton {
+    position: relative;
+    border: 0;
+    height: 30px;
+    border-radius: 10px;
+    color: white;
     flex-grow: 1;
+    background: #3a3a3a;
+    transition: background 0.3s, box-shadow 0.3s;
 }
+#ADTestButton:active {
+    top: 2px;
+    background: #2e2e2e;
+}
+
 .buttonBox{
     display: flex;
     justify-content: space-around;
@@ -83,17 +108,23 @@ body {
     display: none;
 }
 
+
+
+
 .searchLevel {
     align-items: center;
     flex-grow: 1;
     display: flex;
     justify-content: space-around;
+    margin-right: 5px;
     margin-bottom: 20px;
 }
 #searchSelect {
     flex-grow: 1;
 }
 #searchInput {
+    margin-left: 5px;
+    margin-right : 5px;
     flex-grow: 1;
 }
 .tableLevel {
@@ -103,13 +134,15 @@ body {
 #ADTable {
     border-collapse: collapse;
     width: 100%;
-    border: 1px solid dodgerblue;
+    border: 1px solid #464646;
+}
+#ADTable thead {
+    background-color: #dddddd;
 }
 #ADTable td {
     padding: 5px;
-    border-top: 1px solid dodgerblue;
-    border-bottom: 1px solid dodgerblue;
-
+    border-top: 1px solid #464646;
+    border-bottom: 1px solid #464646;
     text-align: center;
 }
 #action1{
@@ -128,4 +161,10 @@ body {
 #popupAdTestBox{
     display: flex;
     flex-flow: column;
+}
+
+.className{
+    position: absolute;
+    top: 10%;
+    left: 10%;
 }
