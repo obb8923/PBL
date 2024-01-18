@@ -130,10 +130,16 @@ public class MainController {
 		return "main";
 	}
 
-	@PostMapping("/ad/{adId}/edit")
-	public String update(@PathVariable("adId") Long adId, Model model) {
+	@PostMapping("/ad/edit")
+	public String update(Model model,@RequestParam("CompanyId") Long id, @RequestParam("Slot") String slot,
+		@RequestParam("Gender") String inputGender,
+		AdForm adForm) {
+		Long adId = adForm.getAdId();
+		System.out.println("adId = " + adId);
 		Image findImage = (Image)adService.findOne(adId);
 
 		return "main";
+
 	}
+
 }

@@ -80,7 +80,13 @@ body {
     top: 2px;
     background: #2e2e2e;
 }
+.action{
+    display:flex;
+}
+.action form{
+    margin:0;display:inline;height:20px; float:left;
 
+}
 #ADTestButton {
     /*
     position: relative;
@@ -149,9 +155,8 @@ body {
     border-bottom: 1px solid #464646;
     text-align: center;
 }
-#action1{
-    display:none;
-}
+
+
 #ADTestResultBox{
     min-height: 100px;
     min-width: 100px;
