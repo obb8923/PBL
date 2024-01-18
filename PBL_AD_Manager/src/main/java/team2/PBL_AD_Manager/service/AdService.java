@@ -51,18 +51,26 @@ public class AdService {
 
 	public List<Ad> findAdsByPage(int pageNum) throws Exception {
 		int unitNum = 5; // 각 페이지에 표시할 광고 수
-		Long totalNum = adRepository.findTotalNumber(); // 전체 광고 수를 조회하는 메서드
+		Long totalNum = adRepository.findTotalNumber(); // 전체 광고 수 조회
 
+		// 에러 처리
 		if (totalNum > Integer.MAX_VALUE) {
 			throw new Exception("totalNum exceeds Integer.MAX_VALUE in findAdsByPage");
 		}
-		int startIdx = totalNum.intValue() - unitNum * pageNum + 1;
-		// startIdx가 유효한 범위 내에 있는지 확인
-		if (startIdx < 0 || startIdx > totalNum.intValue()) {
-			throw new Exception("Invalid start index in findAdsByPage");
+		if (totalNum == 0) {
+			throw new Exception("No ads data in the database");
 		}
-		int endIdx = Math.min(startIdx + unitNum - 1, totalNum.intValue());
 
+		// DB 조회 범위 정하기
+		int startIdx, endIdx;
+		if (totalNum < pageNum) {
+			startIdx = 1;
+			endIdx = totalNum.intValue();
+		} else {
+			startIdx = totalNum.intValue() - unitNum * pageNum + 1;
+			endIdx = totalNum.intValue() - unitNum * (pageNum - 1);
+		}
+		System.out.println(startIdx + " " + endIdx);
 		return adRepository.findAllWithPagination(startIdx, endIdx);
 	}
 }

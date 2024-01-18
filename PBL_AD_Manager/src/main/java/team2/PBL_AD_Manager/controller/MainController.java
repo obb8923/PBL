@@ -53,17 +53,6 @@ public class MainController {
 		}
 	}
 
-	@GetMapping("/{pageNum}")
-	public String pagination(@PathVariable("pageNum") int pageNum, Model model) throws Exception {
-		// adForm 객체를 모델에 추가
-		AdForm adForm = new AdForm(); // AdForm 클래스의 인스턴스 생성
-		model.addAttribute("advertisers", advertiserRepository.findAll());
-		model.addAttribute("ads", adService.findAdsByPage(pageNum));
-		model.addAttribute("adForm", adForm);
-
-		return "main";
-	}
-
 	@PostMapping("/contract/create")
 	public String create(@RequestParam("CompanyId") Long id, @RequestParam("Slot") String slot,
 		@RequestParam("Gender") String inputGender,
@@ -87,6 +76,24 @@ public class MainController {
 		contractsRepository.saveContract(contracts);
 
 		return "redirect:/";
+	}
+
+	@GetMapping("/{pageNum}")
+	public String pagination(@PathVariable("pageNum") int pageNum, Model model) throws Exception {
+		Long totalNum = adRepository.findTotalNumber();
+		List<Ad> adList = adService.findAdsByPage(pageNum);
+		System.out.println("--------------------------------");
+		System.out.println(pageNum);
+		for (Ad ad : adList) {
+			System.out.println(ad.getId());
+		}
+		// adForm 객체를 모델에 추가
+		AdForm adForm = new AdForm(); // AdForm 클래스의 인스턴스 생성
+		model.addAttribute("totalNum", totalNum);
+		model.addAttribute("ads", adList);
+		model.addAttribute("adForm", adForm);
+
+		return "main";
 	}
 
 }
