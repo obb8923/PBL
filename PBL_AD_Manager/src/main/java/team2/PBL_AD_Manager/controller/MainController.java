@@ -18,6 +18,7 @@ import team2.PBL_AD_Manager.domain.Advertiser;
 import team2.PBL_AD_Manager.domain.Contracts;
 import team2.PBL_AD_Manager.domain.Gender;
 import team2.PBL_AD_Manager.domain.SlotPosition;
+import team2.PBL_AD_Manager.domain.TargetInf;
 import team2.PBL_AD_Manager.domain.adType.Ad;
 import team2.PBL_AD_Manager.domain.adType.Image;
 import team2.PBL_AD_Manager.repository.AdRepository;
@@ -82,7 +83,7 @@ public class MainController {
 	public String pagination(@PathVariable("pageNum") int pageNum, Model model) throws Exception {
 		Long totalNum = adRepository.findTotalNumber();
 		List<Ad> adList = adService.findAdsByPage(pageNum);
-		System.out.println("--------------------------------");
+		System.out.println("---------------^^^^ pagination() ^^^-----------------");
 		System.out.println(pageNum);
 		for (Ad ad : adList) {
 			System.out.println(ad.getId());
@@ -93,8 +94,32 @@ public class MainController {
 		model.addAttribute("ads", adList);
 		model.addAttribute("advertisers", advertiserRepository.findAll());
 		model.addAttribute("adForm", adForm);
-
 		return "main";
 	}
 
+	@GetMapping("/detail/{adId}")
+	public String ADdetail(@PathVariable("adId") Long adId, Model model) throws Exception {
+		Ad ad = adRepository.findOne(adId);
+		AdForm adForm = new AdForm(); // AdForm 클래스의 인스턴스 생성
+
+		// ad 객체로 contracts, target info 가져오기
+		Contracts Contracts = ad.getContracts();
+		Advertiser advertiser = Contracts.getAdvertiser();
+		TargetInf targetInf = new TargetInf();
+		int[] targetArr = targetInf.TargetToStr(Contracts.getTargetId());
+
+		model.addAttribute("adDetail", ad);
+		model.addAttribute("adContracts", Contracts);
+		model.addAttribute("adAdvertiser", advertiser);
+		model.addAttribute("adForm", adForm);
+
+		// 출력 test
+		System.out.println("---------------^^^^ ADdetail() ^^^-----------------");
+		System.out.println(Contracts.getStartDate()); // 조회까진 됨.
+		System.out.println(ad.getPrice()); // 조회까진 됨.
+		System.out.println(advertiser.getName()); // 조회까진 됨.
+		System.out.println(targetArr[0] + " / " + targetArr[1]);
+
+		return "main";
+	}
 }
