@@ -129,4 +129,10 @@ public class MainController {
 		return "main";
 	}
 
+	@PostMapping("/ad/{adId}/edit")
+	public String update(@PathVariable("adId") Long adId, Model model) {
+		Image findImage = (Image)adService.findOne(adId);
+
+		return "main";
+	}
 }
