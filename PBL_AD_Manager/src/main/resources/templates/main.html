@@ -223,7 +223,11 @@
                 let endPage = Math.floor(totalNum / 5)+1;
                 let curPage = [[${pageNum}]];
                 //document.getElementById("toEndPage").action = '/' + endPage;
-                pageButton(endPage,curPage);
+                if(totalNum===0){
+
+                }else{
+                    pageButton(endPage,curPage);
+                }
 
             </script>
             <!--        <form id="toEndPage" th:value="${totalNum}" action="/">-->

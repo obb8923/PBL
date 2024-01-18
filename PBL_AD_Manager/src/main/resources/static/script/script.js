@@ -26,9 +26,9 @@ function pageButton(totalNum,pageNum){
     const postpostButton = document.getElementById("postpostButton")
     curButton.innerHTML = currentPage;
     exButton.innerHTML = (currentPage - 1);
-    exexButton.innerHTML = currentPage - 2;
-    postButton.innerHTML = currentPage + 1;
-    postpostButton.innerHTML = currentPage + 2;
+    exexButton.innerHTML = (currentPage - 2);
+    postButton.innerHTML = (currentPage + 1);
+    postpostButton.innerHTML = (currentPage + 2);
     if(parseInt(exexButton.innerText)<1 || parseInt(exexButton.innerText)>totalNum) {
         exexButton.style.display = 'none';
     }else{
