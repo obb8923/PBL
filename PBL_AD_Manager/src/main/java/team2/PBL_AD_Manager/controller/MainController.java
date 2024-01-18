@@ -73,10 +73,20 @@ public class MainController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/hi/{pageNum}")
+	@GetMapping("/{pageNum}")
 	public String pagination(@PathVariable("pageNum") int pageNum, Model model) throws Exception {
 		List<Ad> adList = adService.findAdsByPage(pageNum);
-		model.addAttribute("adList", adList);
+		System.out.println("--------------------------------");
+		System.out.println(pageNum);
+		for (Ad ad : adList) {
+			System.out.println(ad.getId());
+		}
+		// adForm 객체를 모델에 추가
+		AdForm adForm = new AdForm(); // AdForm 클래스의 인스턴스 생성
+		model.addAttribute("ads", adList);
+		model.addAttribute("adForm", adForm);
+
 		return "main";
 	}
+
 }
