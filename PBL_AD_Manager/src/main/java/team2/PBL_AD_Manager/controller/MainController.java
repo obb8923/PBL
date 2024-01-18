@@ -97,5 +97,7 @@ public class MainController {
 		model.addAttribute("adForm", adForm);
 
 		return "main";
+
 	}
+
 }

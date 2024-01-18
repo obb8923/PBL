@@ -53,17 +53,17 @@
     </div>
 </form>
 <!--레이어팝업 상세-->
-<div id ="popupDetail" class="popup">
-    <div>상세 페이지</div>
-    <div>회사명: </div>
-    <div>광고제목: </div>
-    <div>광고조건: </div>
-    <div>슬롯위치: </div>
-    <div>비용: </div>
-    <div>시작일: </div>
-    <div>만료일: </div>
-    <button id="closePopupDetail" type="button" onclick="closePopup('popupDetail')">닫기</button>
-</div>
+<!--<div id ="popupDetail" class="popup">-->
+<!--    <div>상세 페이지</div>-->
+<!--    <div>회사명: </div>-->
+<!--    <div>광고제목: </div>-->
+<!--    <div>광고조건: </div>-->
+<!--    <div>슬롯위치: </div>-->
+<!--    <div>비용: </div>-->
+<!--    <div>시작일: </div>-->
+<!--    <div>만료일: </div>-->
+<!--    <button id="closePopupDetail" type="button" onclick="closePopup('popupDetail')">닫기</button>-->
+<!--</div>-->
 <!--레이어팝업 수정-->
 <form id="popupModify" class="popup" method="post" th:object="${adForm}" action="">
     <select name="CompanyId" id="modifyCompanyName" class="form-control">
@@ -116,7 +116,7 @@
         <div id="popupAdTestTargetBox">
             <div>Target</div>
             <input id="testAdUserId" type="text" value="여기에 쓰세요" />
-            <button id="submitUserId" type="button" onclick="submitUI()">제출</button>
+            <button id="submitUserId" type="button" >제출</button>
         </div>
         <div>
             <div>Result</div>
@@ -170,8 +170,14 @@
                         th:text="${ad.getContracts().getEndDate()}"/></td>
                 <td id="count" th:text="${ad.price}"></td>
                 <td id="regdate" th:text="${ad.getContracts().getStartDate()}"></td>
-                <td id="action2">
-                    <button type="button" onclick="openPopup('popupDetail')">상세</button>
+                <td id="action">
+                    <form name="detailForm" action="/">
+                    <button type="submit">상세</button>
+                    </form>
+                    <script>
+                        const adId=[[${ad.id}]];
+                        toDetail(adId);
+                    </script>
                     <button type="button" onclick="openPopup('popupModify')">수정</button>
                     <button type="button" onclick="openPopup('popupDelete')">삭제</button>
                 </td>
@@ -179,12 +185,9 @@
             </tbody>
         </table>
         <!-- 페이지네이션 버튼 -->
-
     </div>
     <div class="paginationLevel">
-
         <span></span>
-
         <div>
 <!--            <form name="toEx" action="/">-->
 <!--                <button id="toEx" type="submit" ><</button>-->
@@ -195,7 +198,7 @@
             <form name="exForm" action="/">
                 <button id="exButton" type="submit"></button>
             </form>
-            <form name="curForm"  action="/" th:value="${pageNum}">
+            <form name="curForm"  action="/">
                 <button id="curButton" type="submit"></button>
             </form>
             <form   name="postForm" action="/">
