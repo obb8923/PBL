@@ -8,7 +8,7 @@
 
 [김혜은](github.com/hyeesw) - 국민대학교 소프트웨어학과 2학년 
 
-[박정빈](github.com/obb8923) - 국민대학교 나노전자물리학과 3학년 
+[박정빈](https://github.com/obb8923) - 국민대학교 나노전자물리학과 3학년 
 
 [한초희](github.com/cherror) - 국민대학교 소프트웨어학과 2학년 
 
