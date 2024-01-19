@@ -4,13 +4,13 @@
 국민대학교 에서 ( 2024/01/08 ~ 2024/01/19 ) 10일간 진행한, 광고 관리 서비스 제작 프로젝트입니다.
 
 ## 🙋‍♂️팀원 소개
-[김유빈](github.com/KimYooBin1) - 국민대학교 소프트웨어학과 3학년 
+[김유빈](https://github.com/KimYooBin1) - 국민대학교 소프트웨어학과 3학년 
 
-[김혜은](github.com/hyeesw) - 국민대학교 소프트웨어학과 2학년 
+[김혜은](https://github.com/hyeesw) - 국민대학교 소프트웨어학과 2학년 
 
 [박정빈](https://github.com/obb8923) - 국민대학교 나노전자물리학과 3학년 
 
-[한초희](github.com/cherror) - 국민대학교 소프트웨어학과 2학년 
+[한초희](https://github.com/cherror) - 국민대학교 소프트웨어학과 2학년 
 
 
 
