@@ -4,26 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Team 2</title>
+    <link rel="stylesheet" href="/css/ss.css"/>
+    <script src="/script/script.js"></script>
 </head>
+
 <body>
-<h1>광고 정보</h1>
-<tr id="tableRow1" th:object="${ad}">
-    <img th:src="${ad.getUrl()}" alt="이미지 설명">
-    <td id="idx2" th:text="${ad.getClickCount()}"></td>
-    <td id="idx3" th:text="${ad.getId()}"></td>
-    <td id="idx4" th:text="${ad.getText()}"></td>
-</tr>
-<h1>계약 내용</h1>
-<tr id="tableRow2" th:object="${contract}">
-    <td id="idx5" th:text="${contract.getEndDate()}"></td>
-    <td id="idx6" th:text="${contract.getStartDate()}"></td>
-    <td id="idx7" th:text="${contract.getPrice()}"></td>
-    <td id="idx8" th:text="${contract.getSlotPosition()}"></td>
-    <td id="idx9" th:text="${contract.getTargetId()}"></td>
-</tr>
-<h1>광고주</h1>
-<tr id="tableRow3" th:object="${advertiser}">
-    <td id="idx10" th:text="${advertiser.getName()}"></td>
-</tr>
+<h2>상세 정보</h2>
+<div class="main">
+    <div class="imageBox">
+        <img th:src="${ad.getUrl()}" alt="이미지 설명">
+    </div>
+
+    <div class="tables">
+        <div class="tableRow1" th:object="${contract}">
+            <h3>광고 내용</h3>
+            <div>광고 ID : <td id="idx3" th:text="${ad.getId()}"></td></div>
+            <div>광고 제목 : <td id="idx4" th:text="${ad.getText()}"></td> </div>
+            <div>광고 클릭 횟수 : <td id="idx2" th:text="${ad.getClickCount()}"></td></div>
+        </div>
+
+        <div class="tableRow2" th:object="${contract}">
+            <h3>계약 내용</h3>
+            <div>계약일 : <td id="idx6" th:text="${contract.getStartDate()}"></td></div>
+            <div>만료일 : <td id="idx5" th:text="${contract.getEndDate()}"></td></div>
+            <div>광고 비용 : <td id="idx7" th:text="${contract.getPrice()}"></td></div>
+            <div>광고 슬롯 : <td id="idx8" th:text="${contract.getSlotPosition()}"></td></div>
+            <div>광고 타겟 ID : <td id="idx9" th:text="${contract.getTargetId()}"></td></div>
+        </div>
+
+        <div class="tableRow3" th:object="${advertiser}">
+            <h3>광고주 정보</h3>
+            <div>광고주 : <td id="idx10" th:text="${advertiser.getName()}"></td></div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
