@@ -22,6 +22,7 @@ import team2.PBL_AD_Manager.domain.SlotPosition;
 import team2.PBL_AD_Manager.domain.TargetInf;
 import team2.PBL_AD_Manager.domain.adType.Ad;
 import team2.PBL_AD_Manager.domain.adType.Image;
+import team2.PBL_AD_Manager.domain.adType.Video;
 import team2.PBL_AD_Manager.repository.AdRepository;
 import team2.PBL_AD_Manager.repository.AdvertiserRepository;
 import team2.PBL_AD_Manager.repository.ContractsRepository;
@@ -56,29 +57,20 @@ public class MainController {
 	}
 
 	@PostMapping("/contract/create")
-	public String create(@RequestParam("CompanyId") Long id, @RequestParam("Slot") String slot,
-		@RequestParam("Gender") String inputGender,
-		AdForm adForm, BindingResult result) {
+	public String create(AdForm adForm, BindingResult result) {
 
 		// if (result.hasErrors()) {
 		// 	return "/";
 		// }
-
-		Gender gender = (inputGender == "male") ? Gender.male : Gender.female;
-		int age = adForm.getAge();
-		int price = adForm.getPrice();
-		String title = adForm.getTitle();
-		String url = adForm.getUrl();
-		String content = adForm.getContent();
-		SlotPosition slotPosition = (slot == "top") ? SlotPosition.top : SlotPosition.bottom;
+		String type = adForm.getType();
+		Gender gender = (adForm.getGender().equals("male")) ? Gender.male : Gender.female;
+		SlotPosition slotPosition = (adForm.getSlotPosition().equals("top")) ? SlotPosition.top : SlotPosition.bottom;
 		String startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		String endDate = adForm.getEndDate();
-		Image imageAd = Image.createImage(url, price, title);
-		Long targetId = targetService.findId(age, gender);
-		adRepository.saveAd(imageAd);
-		Advertiser advertiser = advertiserRepository.findAdvertiser(id);
-		Contracts contracts = Contracts.createContracts(price, slotPosition, imageAd, targetId, advertiser, startDate,
-			endDate);
+		Video videoAd = Video.createVideo(adForm.getUrl(), adForm.getPrice(), adForm.getTitle());
+		adRepository.saveAd(videoAd);
+		Advertiser advertiser = advertiserRepository.findAdvertiser(adForm.getCompanyId());
+		Contracts contracts = Contracts.createContracts(adForm.getPrice(), slotPosition, videoAd, targetService.findId(adForm.getAge(),gender), advertiser, startDate,
+			adForm.getEndDate());
 
 		contractsRepository.saveContract(contracts);
 
@@ -89,11 +81,7 @@ public class MainController {
 	public String pagination(@PathVariable("pageNum") int pageNum, Model model) throws Exception {
 		Long totalNum = adRepository.findTotalNumber();
 		List<Ad> adList = adService.findAdsByPage(pageNum);
-		System.out.println("---------------^^^^ pagination() ^^^-----------------");
-		System.out.println(pageNum);
-		for (Ad ad : adList) {
-			System.out.println(ad.getId());
-		}
+
 		// adForm 객체를 모델에 추가
 		AdForm adForm = new AdForm(); // AdForm 클래스의 인스턴스 생성
 		model.addAttribute("pageNum", pageNum);
@@ -120,13 +108,6 @@ public class MainController {
 		model.addAttribute("advertiser", advertiser);
 		model.addAttribute("adForm", adForm);
 
-		// 출력 test
-		System.out.println("---------------^^^^ ADdetail() ^^^-----------------");
-		System.out.println(contract.getStartDate()); // 조회까진 됨.
-		System.out.println(ad.getPrice()); // 조회까진 됨.
-		System.out.println(advertiser.getName()); // 조회까진 됨.
-		System.out.println(targetArr[0] + " / " + targetArr[1]);
-
 		return "detail";
 	}
 
@@ -147,11 +128,12 @@ public class MainController {
 		SlotPosition slotPosition = (slot == "top") ? SlotPosition.top : SlotPosition.bottom;
 		String startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		String endDate = adForm.getEndDate();
-		Image imageAd = Image.createImage(url, price, title);
+
+		Video videoAd = Video.createVideo(url, price, title);
 		Long targetId = targetService.findId(age, gender);
-		adRepository.saveAd(imageAd);
+		adRepository.saveAd(videoAd);
 		Advertiser advertiser = advertiserRepository.findAdvertiser(id);
-		Contracts contracts = Contracts.createContracts(price, slotPosition, imageAd, targetId, advertiser, startDate,
+		Contracts contracts = Contracts.createContracts(price, slotPosition, videoAd, targetId, advertiser, startDate,
 			endDate);
 
 		contractsRepository.saveContract(contracts);

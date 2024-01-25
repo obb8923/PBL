@@ -60,8 +60,6 @@ public class Contracts {
 		contracts.setAd(ad);
 		contracts.setAdvertiser(advertiser);
 
-		System.out.println("startDate = " + startDate);
-		System.out.println("endDate = " + endDate);
 		contracts.setStartDate(startDate);
 		contracts.setEndDate(endDate);
 		return contracts;

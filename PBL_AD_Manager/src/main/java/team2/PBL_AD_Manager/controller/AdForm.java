@@ -21,4 +21,11 @@ public class AdForm {
 
 	private String endDate;
 
+	private String type;
+
+	private Long companyId;
+
+	private String slotPosition;
+
+	private String gender;
 }
