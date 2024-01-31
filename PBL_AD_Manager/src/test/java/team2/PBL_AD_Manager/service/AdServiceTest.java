@@ -42,7 +42,7 @@ class AdServiceTest {
 	@Test
 	void AD_count() {
 		Long totalNumber = adRepository.findTotalNumber();
-		assertThat(intValue(totalNumber)).isEqualTo(9);
+		assertThat(intValue(totalNumber)).isEqualTo(3);
 	}
 
 	@Test

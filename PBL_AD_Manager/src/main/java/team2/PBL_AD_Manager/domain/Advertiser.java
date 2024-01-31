@@ -10,8 +10,7 @@ import java.util.List;
 @Entity
 @Getter @Setter
 public class Advertiser {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue
     @Column(name = "advertiser_id")
     private Long id;
 

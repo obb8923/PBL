@@ -15,10 +15,10 @@ class AdvertiserRepositoryTest {
 	AdvertiserRepository advertiserRepository;
 
 	@Test
-	void 테스트() {
+	void 광고주_등록_테스트() {
 		Advertiser adv = new Advertiser();
 
-		adv.setName("advertiser");
+		adv.setName("회사3");
 		advertiserRepository.saveAdvertiser(adv);
 		Advertiser 조회 = advertiserRepository.findAdvertiser(adv.getId());
 		System.out.println("조회 = " + 조회);
