@@ -119,4 +119,19 @@ public class AdService {
 		contractsRepository.saveContract(contracts);
 	}
 
+	@Transactional
+	public void editAdContract(AdForm adForm){
+		Ad ad = adRepository.findOne(adForm.getAdId());
+		ad.setPrice(adForm.getPrice());
+		ad.setText(adForm.getTitle());
+		ad.setUrl(adForm.getUrl());
+
+		Gender gender = checkGender(adForm.getGender());
+		SlotPosition slotPosition = (adForm.getSlotPosition().equals("top")) ? SlotPosition.top : SlotPosition.bottom;
+
+		Contracts.updateContracts(contractsRepository.findContractByAdId(adForm.getAdId()),adForm.getPrice(), slotPosition, ad, targetService.findId(adForm.getAge(),gender),
+			adForm.getEndDate());
+
+	}
+
 }

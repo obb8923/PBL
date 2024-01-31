@@ -74,7 +74,12 @@ function closePopup(popupId) {
     closePopupContainer();
     document.getElementById(popupId).style.display = 'none';
 }
+
 function openPopup(popupId) {
     openPopupContainer();
     document.getElementById(popupId).style.display = 'flex';
+}
+function openIdPopup(popupId, adId){
+    openPopup(popupId);
+    document.getElementById("adId").value = adId;
 }

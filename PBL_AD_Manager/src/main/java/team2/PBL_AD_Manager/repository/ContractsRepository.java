@@ -24,7 +24,7 @@ public class ContractsRepository {
 
 	// Ad 테이블의 ad_id로 계약 테이블 조회
 	public Contracts findContractByAdId(Long ad_id) {
-		String jpql = "SELECT Contracts FROM Contracts WHERE Contracts.ad = :ad_id";
+		String jpql = "SELECT c FROM Contracts c WHERE c.ad.id = :ad_id";
 		return em.createQuery(jpql, Contracts.class).setParameter("ad_id", ad_id).getSingleResult();
 	}
 }

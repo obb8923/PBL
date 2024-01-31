@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -18,7 +19,7 @@ import team2.PBL_AD_Manager.domain.adType.Ad;
 @Setter
 public class Contracts {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "contract_id")
 	private Long id;
 
@@ -63,5 +64,15 @@ public class Contracts {
 		contracts.setStartDate(startDate);
 		contracts.setEndDate(endDate);
 		return contracts;
+	}
+
+	public static void updateContracts(Contracts contracts, int price, SlotPosition slotPosition, Ad ad, Long targetId, String endDate){
+
+		contracts.setPrice(price);
+		contracts.setSlotPosition(slotPosition);
+		contracts.setTargetId(targetId);
+		contracts.setAd(ad);
+
+		contracts.setEndDate(endDate);
 	}
 }

@@ -18,10 +18,10 @@ class AdvertiserRepositoryTest {
 	void 테스트() {
 		Advertiser adv = new Advertiser();
 
-		adv.setName("dilkaej");
+		adv.setName("advertiser");
 		advertiserRepository.saveAdvertiser(adv);
 		Advertiser 조회 = advertiserRepository.findAdvertiser(adv.getId());
-		// System.out.println("조회 = " + 조회);
+		System.out.println("조회 = " + 조회);
 		Assertions.assertThat(adv.getId()).isEqualTo(조회.getId());
 	}
 }

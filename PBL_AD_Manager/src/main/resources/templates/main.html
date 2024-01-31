@@ -16,14 +16,14 @@
 <form id="popupAdd" class="popup" method="post" th:object="${adForm}" action="/contract/create">
     <select name="CompanyId" id="addCompanyName" class="form-control" th:field="*{companyId}">
         <!--기본적으로 default 는 선택이 안되고 최초에만 띄우고 싶은데 안됨, 아래 모든 selected 동일-->
-        <option value="">회사선택</option>
+        <option th:value="Null" disabled="disabled" selected="selected">회사선택</option>
         <option th:each="advertiser : ${advertisers}"
                 th:value="${advertiser.id}"
                 th:text="${advertiser.name}"/>
     </select>
 
     <select name="AdType" id="addType" class="form-control" th:field="*{type}">
-        <option value="" >광고 타입 선택</option>
+        <option th:value="Null" disabled="disabled" selected="selected">광고 타입 선택</option>
         <option th:value="image" th:text="image" />
         <option th:value="video" th:text="video" />
     </select>
@@ -32,8 +32,8 @@
     <input th:field="*{title}" id="addADName" placeholder="광고 제목"/>
     <input th:field="*{url}" id="addADUrl" placeholder="광고 URL"/>
     <input th:field="*{content}" id="addADContent" placeholder="광고 설명"/>
-    <select name="Age" id="addAgeCondition">
-        <option value="" disabled="disabled" selected="selected">연령대</option>
+    <select name="Age" id="addAgeCondition" th:field="*{age}">
+        <option th:value="-1" disabled="disabled" selected="selected">연령대</option>
         <option id="allAges" th:value="0">모든 연령</option>
         <option id="teenager" th:value="10">10대</option>
         <option id="twenties" th:value="20">20대</option>
@@ -42,16 +42,14 @@
         <option id="fifties" th:value="50">50대</option>
         <option id="sixties" th:value="60">60대 이상</option>
     </select>
-    <select name="Gender" id="addGenderCondition">
-        <option value="" disabled="disabled" selected="selected">성별 선택</option>
-        <option value="allGender">성별 무관</option>
-        <option value="male">남성</option>
-        <option value="female">여성</option>
+    <select name="Gender" id="addGenderCondition" th:field="*{gender}">
+        <option th:value="Null" disabled="disabled" selected="selected">성별 선택</option>
+        <option th:value="allGender">성별 무관</option>
+        <option th:value="male">남성</option>
+        <option th:value="female">여성</option>
     </select>
-    <!--    <div>성별: <input th:field="*{gender}" id="addGenderCondition"/></div>-->
-    <!--    <div>슬롯위치: <input th:field="*{slotPosition}" id="addSlot"/></div>-->
     <select name="Slot" id="addSlot" th:field="*{slotPosition}">
-        <option value="" disabled="disabled" selected="selected" th:field="*{slotPosition}">slot 위치 선택</option>
+        <option th:value="Null" disabled="disabled" selected="selected">slot 위치 선택</option>
         <option th:value="top">top</option>
         <option th:value="bottom">bottom</option>
     </select>
@@ -74,44 +72,44 @@
 
 <!--레이어팝업 수정-->
 
-<form id="popupModify" class="popup" method="post" th:object="${adForm}" action="/contract/modify">
-    <select name="CompanyId" id="modifyCompanyName" class="form-control">
-        <option value="" disabled="disabled" selected="selected">회사선택</option>
-        <option th:each="advertiser : ${advertisers}"
-                th:value="${advertiser.id}"
-                th:text="${advertiser.name}"/>
+<form id="popupModify" class="popup" method="post" th:object="${adForm}" action="/ad/edit">
+    <div>
+        광고 id값 :
+        <input id="adId" readonly th:field="*{adId}"/>
+    </div>
+    <select name="AdType" id="modigyType" class="form-control" th:field="*{type}">
+        <option th:value="Null" disabled="disabled" selected="selected">광고 타입 선택</option>
+        <option th:value="image" th:text="image" />
+        <option th:value="video" th:text="video" />
     </select>
     <input th:field="*{title}" id="modifyADName" placeholder="광고 제목"/>
     <input th:field="*{url}" id="modifyADUrl" placeholder="광고 URL"/>
     <input th:field="*{content}" id="modifyADContent" placeholder="광고 설명"/>
-    <select name="Age" id="modifyAgeCondition">
-        <option value="" disabled="disabled" selected="selected">연령대</option>
-        <option value="allAges">모든 연령</option>
-        <option value="teenager">10대</option>
-        <option value="twenties">20대</option>
-        <option value="thirties">30대</option>
-        <option value="forties">40대</option>
-        <option value="fifties">50대</option>
-        <option value="sixties">60대 이상</option>
+    <select name="Age" id="modifyAgeCondition" th:field="*{age}">
+        <option th:value="-1" disabled="disabled" selected="selected">연령대</option>
+        <option value="editAllAges" th:value="0">모든 연령</option>
+        <option value="editTeenager" th:value="10">10대</option>
+        <option value="editTwenties" th:value="20">20대</option>
+        <option value="editThirties" th:value="30">30대</option>
+        <option value="editForties" th:value="40">40대</option>
+        <option value="editFifties" th:value="50">50대</option>
+        <option value="editSixties" th:value="60">60대 이상</option>
     </select>
     <select name="Gender" id="modifyGenderCondition" th:field="*{gender}">
-        <option value="" disabled="disabled" selected="selected">성별 선택</option>
-        <option value="all">성별 무관</option>
-        <option value="male">남성</option>
-        <option value="female">여성</option>
+        <option th:value="Null" disabled="disabled" selected="selected">성별 선택</option>
+        <option th:value="all">성별 무관</option>
+        <option th:value="male">남성</option>
+        <option th:value="female">여성</option>
     </select>
-    <!--    <div>성별: <input th:field="*{gender}" id="addGenderCondition"/></div>-->
-    <!--    <div>슬롯위치: <input th:field="*{slotPosition}" id="addSlot"/></div>-->
-    <select name="Slot" id="modifySlot">
-        <option value="" disabled="disabled" selected="selected">slot 위치 선택</option>
-        <option value="top">top</option>
-        <option value="bottom">bottom</option>
+    <select name="Slot" id="modifySlot" th:field="*{slotPosition}">
+        <option th:value="Null" disabled="disabled" selected="selected">slot 위치 선택</option>
+        <option th:value="top">top</option>
+        <option th:value="bottom">bottom</option>
     </select>
 
     <input th:field="*{price}" id="modifyCost" placeholder="광고 비용"/></div>
 
-    <div>시작일 : <input type="date" id="modifyDayStart"/></div>
-    <div>만료일 : <input type="date" id="modifyDayEnd"/></div>
+    <div>만료일 : <input type="date" id="modifyDayEnd" th:field="*{endDate}"/></div>
     <div class="buttonBox">
         <div>
             <script>function closePopup2(popupId) {
@@ -197,7 +195,7 @@
                             <a id="detailLink" th:href="@{/detail/{id}(id=${ad.id})}" class="">상세</a>
                         </button>
                     </form>
-                    <button type="button" onclick="openPopup('popupModify')">수정</button>
+                    <button type="button" th:onclick="'openIdPopup(\'popupModify\', \'' + ${ad.id} + '\')'">수정</button>
                     <button type="button" onclick="openPopup('popupDelete')">삭제</button>
                 </td>
             </tr>

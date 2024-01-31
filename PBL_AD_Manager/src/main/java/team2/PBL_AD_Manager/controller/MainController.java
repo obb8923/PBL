@@ -59,7 +59,7 @@ public class MainController {
 	@PostMapping("/contract/create")
 	public String create(AdForm adForm, BindingResult result) {
 
-		adService.createAdContract(adForm);
+ 		adService.createAdContract(adForm);
 
 		return "redirect:/";
 	}
@@ -99,33 +99,34 @@ public class MainController {
 	}
 
 	@PostMapping("/ad/edit")
-	public String update(Model model,@RequestParam("CompanyId") Long id, @RequestParam("Slot") String slot,
-		@RequestParam("Gender") String inputGender,
-		AdForm adForm) {
+	public String update(Model model, AdForm adForm) {
 		// Long adId = adForm.getAdId();
 		// System.out.println("adId = " + adId);
 		// Image findImage = (Image)adService.findOne(adId);
 
-		Gender gender = (inputGender == "male") ? Gender.male : Gender.female;
-		int age = adForm.getAge();
-		int price = adForm.getPrice();
-		String title = adForm.getTitle();
-		String url = adForm.getUrl();
-		String content = adForm.getContent();
-		SlotPosition slotPosition = (slot == "top") ? SlotPosition.top : SlotPosition.bottom;
-		String startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		String endDate = adForm.getEndDate();
+		adService.editAdContract(adForm);
 
-		Video videoAd = Video.createVideo(url, price, title);
-		Long targetId = targetService.findId(age, gender);
-		adRepository.saveAd(videoAd);
-		Advertiser advertiser = advertiserRepository.findAdvertiser(id);
-		Contracts contracts = Contracts.createContracts(price, slotPosition, videoAd, targetId, advertiser, startDate,
-			endDate);
-
-		contractsRepository.saveContract(contracts);
+		// Gender gender = (inputGender == "male") ? Gender.male : Gender.female;
+		// int age = adForm.getAge();
+		// int price = adForm.getPrice();
+		// String title = adForm.getTitle();
+		// String url = adForm.getUrl();
+		// String content = adForm.getContent();
+		// SlotPosition slotPosition = (slot == "top") ? SlotPosition.top : SlotPosition.bottom;
+		// String startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		// String endDate = adForm.getEndDate();
+		//
+		// Video videoAd = Video.createVideo(url, price, title);
+		// Long targetId = targetService.findId(age, gender);
+		// adRepository.saveAd(videoAd);
+		// Advertiser advertiser = advertiserRepository.findAdvertiser(id);
+		// Contracts contracts = Contracts.createContracts(price, slotPosition, videoAd, targetId, advertiser, startDate,
+		// 	endDate);
+		//
+		// contractsRepository.saveContract(contracts);
 
 		return "redirect:/";
 	}
+
 
 }
