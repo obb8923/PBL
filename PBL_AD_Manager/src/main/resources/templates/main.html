@@ -77,11 +77,6 @@
         광고 id값 :
         <input id="adId" readonly th:field="*{adId}"/>
     </div>
-    <select name="AdType" id="modigyType" class="form-control" th:field="*{type}">
-        <option th:value="Null" disabled="disabled" selected="selected">광고 타입 선택</option>
-        <option th:value="image" th:text="image" />
-        <option th:value="video" th:text="video" />
-    </select>
     <input th:field="*{title}" id="modifyADName" placeholder="광고 제목"/>
     <input th:field="*{url}" id="modifyADUrl" placeholder="광고 URL"/>
     <input th:field="*{content}" id="modifyADContent" placeholder="광고 설명"/>

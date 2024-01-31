@@ -99,7 +99,7 @@ public class MainController {
 	}
 
 	@PostMapping("/ad/edit")
-	public String update(Model model, AdForm adForm) {
+	public String update(AdForm adForm) {
 
 		adService.editAdContract(adForm);
 
