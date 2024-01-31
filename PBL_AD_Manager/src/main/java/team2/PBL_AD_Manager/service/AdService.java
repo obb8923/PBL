@@ -1,19 +1,34 @@
 package team2.PBL_AD_Manager.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import team2.PBL_AD_Manager.controller.AdForm;
+import team2.PBL_AD_Manager.domain.Advertiser;
+import team2.PBL_AD_Manager.domain.Contracts;
+import team2.PBL_AD_Manager.domain.Gender;
+import team2.PBL_AD_Manager.domain.SlotPosition;
 import team2.PBL_AD_Manager.domain.adType.Ad;
+import team2.PBL_AD_Manager.domain.adType.Image;
+import team2.PBL_AD_Manager.domain.adType.Video;
 import team2.PBL_AD_Manager.repository.AdRepository;
+import team2.PBL_AD_Manager.repository.AdvertiserRepository;
+import team2.PBL_AD_Manager.repository.ContractsRepository;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class AdService {
 	private final AdRepository adRepository;
+	private final AdvertiserRepository advertiserRepository;
+	private final ContractsRepository contractsRepository;
+	private final TargetService targetService;
 
 	@Transactional
 	public void saveAd(Ad ad) {
@@ -73,4 +88,35 @@ public class AdService {
 		System.out.println(startIdx + " " + endIdx);
 		return adRepository.findAllWithPagination(startIdx, endIdx);
 	}
+
+	public Gender checkGender(String gender) {
+		if(gender.equals("male"))
+			return Gender.male;
+		else if (gender.equals("female"))
+			return Gender.female;
+		 else
+			return Gender.all;
+	}
+
+	@Transactional
+	public void createAdContract(AdForm adForm){
+		String type = adForm.getType();
+		Ad ad;
+		if(Objects.equals(type, "video")){
+			ad = Video.createVideo(adForm.getUrl(), adForm.getPrice(), adForm.getTitle());
+		}
+		else{
+			ad = Image.createImage(adForm.getUrl(), adForm.getPrice(), adForm.getTitle());
+		}
+		Gender gender = checkGender(adForm.getGender());
+		SlotPosition slotPosition = (adForm.getSlotPosition().equals("top")) ? SlotPosition.top : SlotPosition.bottom;
+		String startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		adRepository.saveAd(ad);
+		Advertiser advertiser = advertiserRepository.findAdvertiser(adForm.getCompanyId());
+		Contracts contracts = Contracts.createContracts(adForm.getPrice(), slotPosition, ad, targetService.findId(adForm.getAge(),gender), advertiser, startDate,
+			adForm.getEndDate());
+
+		contractsRepository.saveContract(contracts);
+	}
+
 }

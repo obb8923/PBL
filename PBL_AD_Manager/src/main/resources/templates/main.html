@@ -15,7 +15,7 @@
 <!-- 레이어 팝업 ADD-->
 <form id="popupAdd" class="popup" method="post" th:object="${adForm}" action="/contract/create">
     <select name="CompanyId" id="addCompanyName" class="form-control" th:field="*{companyId}">
-        <!--기본적으로 default 는 선택이 안되고 최초에만 띄우고 싶은데 안됨-->
+        <!--기본적으로 default 는 선택이 안되고 최초에만 띄우고 싶은데 안됨, 아래 모든 selected 동일-->
         <option value="">회사선택</option>
         <option th:each="advertiser : ${advertisers}"
                 th:value="${advertiser.id}"
@@ -23,7 +23,6 @@
     </select>
 
     <select name="AdType" id="addType" class="form-control" th:field="*{type}">
-        <!--기본적으로 default 는 선택이 안되고 최초에만 띄우고 싶은데 안됨-->
         <option value="" >광고 타입 선택</option>
         <option th:value="image" th:text="image" />
         <option th:value="video" th:text="video" />
