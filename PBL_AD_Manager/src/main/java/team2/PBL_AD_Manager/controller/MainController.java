@@ -59,22 +59,6 @@ public class MainController {
 	@PostMapping("/contract/create")
 	public String create(AdForm adForm, BindingResult result) {
 
-		// if (result.hasErrors()) {
-		// 	return "/";
-		// }
-
-		// String type = adForm.getType();
-		// Gender gender = adService.checkGender(adForm.getGender());
-		// SlotPosition slotPosition = (adForm.getSlotPosition().equals("top")) ? SlotPosition.top : SlotPosition.bottom;
-		// String startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		// Ad videoAd = Video.createVideo(adForm.getUrl(), adForm.getPrice(), adForm.getTitle());
-		// adRepository.saveAd(videoAd);
-		// Advertiser advertiser = advertiserRepository.findAdvertiser(adForm.getCompanyId());
-		// Contracts contracts = Contracts.createContracts(adForm.getPrice(), slotPosition, videoAd, targetService.findId(adForm.getAge(),gender), advertiser, startDate,
-		// 	adForm.getEndDate());
-		//
-		// contractsRepository.saveContract(contracts);
-
 		adService.createAdContract(adForm);
 
 		return "redirect:/";
