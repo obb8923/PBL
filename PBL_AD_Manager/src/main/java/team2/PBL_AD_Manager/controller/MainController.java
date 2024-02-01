@@ -1,9 +1,8 @@
 package team2.PBL_AD_Manager.controller;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,17 +16,12 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import team2.PBL_AD_Manager.domain.Advertiser;
 import team2.PBL_AD_Manager.domain.Contracts;
-import team2.PBL_AD_Manager.domain.Gender;
-import team2.PBL_AD_Manager.domain.SlotPosition;
 import team2.PBL_AD_Manager.domain.TargetInf;
 import team2.PBL_AD_Manager.domain.adType.Ad;
-import team2.PBL_AD_Manager.domain.adType.Image;
-import team2.PBL_AD_Manager.domain.adType.Video;
 import team2.PBL_AD_Manager.repository.AdRepository;
 import team2.PBL_AD_Manager.repository.AdvertiserRepository;
-import team2.PBL_AD_Manager.repository.ContractsRepository;
 import team2.PBL_AD_Manager.service.AdService;
-import team2.PBL_AD_Manager.service.TargetService;
+import team2.PBL_AD_Manager.service.CheckService;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,37 +29,26 @@ public class MainController {
 
 	private final AdvertiserRepository advertiserRepository;
 	private final AdService adService;
-	private final ContractsRepository contractsRepository;
 	private final AdRepository adRepository;
-	private final TargetService targetService;
+	private final CheckService checkService;
 
-	@Getter
-	static class AdList {
-		private List<Ad> adList = new ArrayList<>();
-	}
+
 
 	@GetMapping("/")
 	public String getAdApi(Model model) {
-		if (adRepository.findTotalNumber() == 0) {
-			model.addAttribute("advertisers", advertiserRepository.findAll());
-			AdForm adForm = new AdForm(); // AdForm 클래스의 인스턴스 생성
-			model.addAttribute("adForm", adForm);
+		if(Objects.equals(checkService.checkDB(model), "main")){
 			return "main";
-		} else {
-			return "redirect:/1";
 		}
-	}
-
-	@PostMapping("/contract/create")
-	public String create(AdForm adForm, BindingResult result) {
-
- 		adService.createAdContract(adForm);
-
-		return "redirect:/";
+		return "redirect:/1";
 	}
 
 	@GetMapping("/{pageNum}")
 	public String pagination(@PathVariable("pageNum") int pageNum, Model model) throws Exception {
+
+		if(Objects.equals(checkService.checkDB(model), "main")){
+			return "main";
+		}
+
 		Long totalNum = adRepository.findTotalNumber();
 		List<Ad> adList = adService.findAdsByPage(pageNum);
 
@@ -77,6 +60,14 @@ public class MainController {
 		model.addAttribute("advertisers", advertiserRepository.findAll());
 		model.addAttribute("adForm", adForm);
 		return "main";
+	}
+
+	@PostMapping("/contract/create")
+	public String create(AdForm adForm, BindingResult result) {
+
+ 		adService.createAdContract(adForm);
+
+		return "redirect:/";
 	}
 
 	@GetMapping("/detail/{adId}")
