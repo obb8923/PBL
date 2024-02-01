@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="userInfoModal" class="uesrInfoModal" >
-    <div id="popupAdTest" class="popup">
+    <form id="popupAdTest" class="popup" method="post" action="/ad/test">
         <div id="popupAdTestBox">
             <div id="popupAdTestTargetBox">
                 <div>Target</div>
-                <input id="testAdUserId" type="text" placeholder="여기에 쓰세요" />
-                <button id="submitUserId" type="button" >제출</button>
-
+                <select name="testAdUserId" id="testAdUserId" onchange="clickSubmit(this.value)">
+                    <option value="Null" disabled="disabled" selected="selected">타겟유저선택</option>
+                    <option th:each="user: ${users}"
+                            th:value="${user.id + '|' + user.age + '|' + user.gender}"
+                            th:text="${user.id}"/>
+                </select>
             </div>
             <div>
                 <div>Result</div>
-                <div id="ADTestResultBox"></div>
+                <div id="ADTestResultUserId">유저 아이디 : <input id="TestResultId" readonly="readonly"/></div>
+                <div id="ADTesTResultAge">유저 나이 : <input id="TestResultAge" readonly="readonly"/></div>
+                <div id="ADTesTResultGender">유저 성별 : <input id="TestResultGender" readonly="readonly"/></div>
                 <div>
-                    <button type="button">Web View</button>
+                    <button type="submit">Web View</button>
                     <button type="button" onclick="closePopup('popupAdTest')">닫기</button>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 </html>

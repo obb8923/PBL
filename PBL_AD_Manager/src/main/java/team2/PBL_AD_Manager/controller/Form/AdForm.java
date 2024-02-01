@@ -1,4 +1,4 @@
-package team2.PBL_AD_Manager.controller;
+package team2.PBL_AD_Manager.controller.Form;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,5 @@
 package team2.PBL_AD_Manager.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,22 +11,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import team2.PBL_AD_Manager.controller.Form.AdForm;
 import team2.PBL_AD_Manager.domain.Advertiser;
 import team2.PBL_AD_Manager.domain.Contracts;
 import team2.PBL_AD_Manager.domain.TargetInf;
 import team2.PBL_AD_Manager.domain.adType.Ad;
 import team2.PBL_AD_Manager.repository.AdRepository;
-import team2.PBL_AD_Manager.repository.AdvertiserRepository;
 import team2.PBL_AD_Manager.service.AdService;
+import team2.PBL_AD_Manager.service.AdvertiserService;
 import team2.PBL_AD_Manager.service.CheckService;
+import team2.PBL_AD_Manager.service.UserService;
 
 @Controller
 @RequiredArgsConstructor
 public class MainController {
 
-	private final AdvertiserRepository advertiserRepository;
+	private final AdvertiserService advertiserService;
+	private final UserService userService;
 	private final AdService adService;
 	private final AdRepository adRepository;
 	private final CheckService checkService;
@@ -57,8 +58,9 @@ public class MainController {
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("totalNum", totalNum);
 		model.addAttribute("ads", adList);
-		model.addAttribute("advertisers", advertiserRepository.findAll());
+		model.addAttribute("advertisers", advertiserService.findAdvertisers());
 		model.addAttribute("adForm", adForm);
+		model.addAttribute("users", userService.findUsers());
 		return "main";
 	}
 
@@ -103,6 +105,11 @@ public class MainController {
 		adService.delete(adId);
 
 		return "redirect:/";
+	}
+
+	@PostMapping("/ad/test")
+	public String AdTest(){
+		return "adTest";
 	}
 
 }

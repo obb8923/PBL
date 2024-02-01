@@ -1,5 +1,7 @@
 package team2.PBL_AD_Manager.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,15 +13,19 @@ import team2.PBL_AD_Manager.repository.UserRepository;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class UserService {
-	private final UserRepository userRePository;
+	private final UserRepository userRepository;
 
 	public User findOne(Long id) {
-		return userRePository.fincOne(id);
+		return userRepository.findOne(id);
 	}
 
 	@Transactional
 	public void save(User user) {
-		userRePository.save(user);
+		userRepository.save(user);
+	}
+
+	public List<User> findUsers(){
+		return userRepository.findAll();
 	}
 
 }

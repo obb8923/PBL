@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import team2.PBL_AD_Manager.controller.AdForm;
+import team2.PBL_AD_Manager.controller.Form.AdForm;
 import team2.PBL_AD_Manager.domain.Advertiser;
 import team2.PBL_AD_Manager.domain.Contracts;
 import team2.PBL_AD_Manager.domain.Gender;

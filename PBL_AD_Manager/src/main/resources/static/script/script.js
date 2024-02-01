@@ -83,5 +83,11 @@ function openIdPopup(popupId, adId){
     openPopup(popupId);
     document.getElementsByClassName("adId")[0].value = adId;
     document.getElementsByClassName("adId")[1].value = adId;
+}
+function clickSubmit(userInfo){
+    const split = userInfo.split('|');
+    document.getElementById("TestResultId").value = split[0];
+    document.getElementById("TestResultAge").value = split[1];
+    document.getElementById("TestResultGender").value = split[2];
 
 }

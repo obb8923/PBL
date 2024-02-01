@@ -1,5 +1,7 @@
 package team2.PBL_AD_Manager.repository;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;
@@ -15,8 +17,11 @@ public class UserRepository {
 		em.persist(user);
 	}
 
-	public User fincOne(Long id) {
+	public User findOne(Long id) {
 		return em.find(User.class, id);
 	}
 
+	public List<User> findAll(){
+		return em.createQuery("select u from User u", User.class).getResultList();
+	}
 }
