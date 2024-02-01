@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="userInfoModal" class="uesrInfoModal" >
+    <div id="popupAdTest" class="popup">
+        <div id="popupAdTestBox">
+            <div id="popupAdTestTargetBox">
+                <div>Target</div>
+                <input id="testAdUserId" type="text" value="여기에 쓰세요" />
+                <button id="submitUserId" type="button" >제출</button>
+
+            </div>
+            <div>
+                <div>Result</div>
+                <div id="ADTestResultBox"></div>
+                <div>
+                    <button type="button">Web View</button>
+                    <button type="button" onclick="closePopup('popupAdTest')">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

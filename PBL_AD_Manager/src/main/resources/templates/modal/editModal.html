@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="editMoodal" class="editModal">
+        <form id="popupModify" class="popup" method="post" th:object="${adForm}" action="/ad/edit">
+            <div>광고 수정</div>
+            <div>
+                광고 id값 :
+                <input id="adId" readonly th:field="*{adId}"/>
+            </div>
+            <input th:field="*{title}" id="modifyADName" placeholder="광고 제목"/>
+            <input th:field="*{url}" id="modifyADUrl" placeholder="광고 URL"/>
+            <input th:field="*{content}" id="modifyADContent" placeholder="광고 설명"/>
+            <select name="Age" id="modifyAgeCondition" th:field="*{age}">
+                <option th:value="-1" disabled="disabled" selected="selected">연령대</option>
+                <option value="editAllAges" th:value="0">모든 연령</option>
+                <option value="editTeenager" th:value="10">10대</option>
+                <option value="editTwenties" th:value="20">20대</option>
+                <option value="editThirties" th:value="30">30대</option>
+                <option value="editForties" th:value="40">40대</option>
+                <option value="editFifties" th:value="50">50대</option>
+                <option value="editSixties" th:value="60">60대 이상</option>
+            </select>
+            <select name="Gender" id="modifyGenderCondition" th:field="*{gender}">
+                <option th:value="Null" disabled="disabled" selected="selected">성별 선택</option>
+                <option th:value="all">성별 무관</option>
+                <option th:value="male">남성</option>
+                <option th:value="female">여성</option>
+            </select>
+            <select name="Slot" id="modifySlot" th:field="*{slotPosition}">
+                <option th:value="Null" disabled="disabled" selected="selected">slot 위치 선택</option>
+                <option th:value="top">top</option>
+                <option th:value="bottom">bottom</option>
+            </select>
+
+            <input th:field="*{price}" id="modifyCost" placeholder="광고 비용"/>
+
+            <div>만료일 : <input type="date" id="modifyDayEnd" th:field="*{endDate}"/></div>
+            <div class="buttonBox">
+                <div>
+                    <script>function closePopup2(popupId) {
+                        closePopupContainer();
+                        document.getElementById(popupId).style.display = 'none';
+                    }
+                    </script>
+                    <button  type="button" onclick="closePopup2('popupModify')">닫기</button>
+                    <button  type="submit" onclick="closePopup2('popupModify')">확인</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</html>

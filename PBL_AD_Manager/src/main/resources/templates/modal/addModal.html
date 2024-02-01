@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--등록은 잘되는데 adForm 에서 cannot resolve 경고 발생. adForm 인자를 인식하지 못함-->
+<div th:fragment="addModal" class="addModal">
+    <form id="popupAdd" class="popup" method="post" th:object="${adForm}" action="/contract/create">
+        <div>광고 등록</div>
+        <select name="CompanyId" id="addCompanyName" class="form-control" th:field="*{companyId}">
+            <!--기본적으로 default 는 선택이 안되고 최초에만 띄우고 싶은데 안됨, 아래 모든 selected 동일-->
+            <option th:value="Null" disabled="disabled" selected="selected">회사선택</option>
+            <option th:each="advertiser : ${advertisers}"
+                    th:value="${advertiser.id}"
+                    th:text="${advertiser.name}"/>
+        </select>
+
+        <select name="AdType" id="addType" class="form-control" th:field="*{type}">
+            <option th:value="Null" disabled="disabled" selected="selected">광고 타입 선택</option>
+            <option th:value="image" th:text="image" />
+            <option th:value="video" th:text="video" />
+        </select>
+
+        <!--    <div>회사명: <input th:field="*{name}" id="addCompanyName"/></div>-->
+        <input th:field="*{title}" id="addADName" placeholder="광고 제목"/>
+        <input th:field="*{url}" id="addADUrl" placeholder="광고 URL"/>
+        <input th:field="*{content}" id="addADContent" placeholder="광고 설명"/>
+        <select name="Age" id="addAgeCondition" th:field="*{age}">
+            <option th:value="-1" disabled="disabled" selected="selected">연령대</option>
+            <option id="allAges" th:value="0">모든 연령</option>
+            <option id="teenager" th:value="10">10대</option>
+            <option id="twenties" th:value="20">20대</option>
+            <option id="thirties" th:value="30">30대</option>
+            <option id="forties" th:value="40">40대</option>
+            <option id="fifties" th:value="50">50대</option>
+            <option id="sixties" th:value="60">60대 이상</option>
+        </select>
+        <select name="Gender" id="addGenderCondition" th:field="*{gender}">
+            <option th:value="Null" disabled="disabled" selected="selected">성별 선택</option>
+            <option th:value="allGender">성별 무관</option>
+            <option th:value="male">남성</option>
+            <option th:value="female">여성</option>
+        </select>
+        <select name="Slot" id="addSlot" th:field="*{slotPosition}">
+            <option th:value="Null" disabled="disabled" selected="selected">slot 위치 선택</option>
+            <option th:value="top">top</option>
+            <option th:value="bottom">bottom</option>
+        </select>
+
+        <input th:field="*{price}" id="addCost" placeholder="광고 비용"/>
+
+        <div>만료일 : <input th:field="*{endDate}" type="date" id="addDayEnd"/></div>
+        <div class="buttonBox">
+            <div>
+                <script>function closePopup2(popupId) {
+                    closePopupContainer();
+                    document.getElementById(popupId).style.display = 'none';
+                }
+                </script>
+                <button id="closePopup" type="button" onclick="closePopup2('popupAdd')">닫기</button>
+                <button id="confirmAdd" type="submit" onclick="closePopup2('popupAdd')">확인</button>
+            </div>
+        </div>
+    </form>
+</div>
+</html>
