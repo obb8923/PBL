@@ -81,5 +81,7 @@ function openPopup(popupId) {
 }
 function openIdPopup(popupId, adId){
     openPopup(popupId);
-    document.getElementById("adId").value = adId;
+    document.getElementsByClassName("adId")[0].value = adId;
+    document.getElementsByClassName("adId")[1].value = adId;
+
 }

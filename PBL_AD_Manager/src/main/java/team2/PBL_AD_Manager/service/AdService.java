@@ -50,8 +50,10 @@ public class AdService {
 	 * 해당 ad 를 DB 에서 삭
 	 * @param adId
 	 */
+	@Transactional
 	public void delete(Long adId) {
-
+		Contracts contracts = contractsRepository.findContractByAdId(adId);
+		contracts.setIsActive(false);
 	}
 
 	public List<Ad> findAds() {

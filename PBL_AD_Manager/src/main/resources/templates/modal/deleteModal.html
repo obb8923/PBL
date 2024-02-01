@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="deleteModal" class="deleteModal">
-    <div id="popupDelete" class="popup">
-        <div>삭제하시겠습니까?</div>
-        <button id="cancelPopupDelete" type="button" onclick="closePopup('popupDelete')">취소</button>
-        <button id="closePopupDelete" type="button" onclick="closePopup('popupDelete')">삭제</button>
-    </div>
+    <form method="post" action="/ad/delete" >
+        <div id="popupDelete" class="popup">
+            <div>광고 번호 : <input class="adId" readonly name="adId"/></div>
+            <div>삭제하시겠습니까?</div>
+            <button id="cancelPopupDelete" type="submit">삭제</button>
+            <button id="closePopupDelete" type="button" onclick="closePopup('popupDelete')">취소</button>
+        </div>
+    </form>
 </div>
 </html>

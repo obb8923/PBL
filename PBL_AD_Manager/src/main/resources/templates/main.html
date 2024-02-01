@@ -52,18 +52,20 @@
                 <td>Exposure datetime</td>
                 <td>count</td>
                 <td>regdate</td>
+                <td>광고 만료 여부</td>
                 <td>action</td>
             </tr>
             </thead>
             <tbody>
             <tr id="tableRow" th:each="ad : ${ads}">
-                <td id="idx" th:text="${ad.id}"></td>
-                <td id="advertiser" th:text="${ad.getContracts().getAdvertiser().getName()}"></td>
-                <td id="text" th:text="${ad.text}"></td>
+                <td id="idx" th:text="${ad.id}" />
+                <td id="advertiser" th:text="${ad.getContracts().getAdvertiser().getName()}" />
+                <td id="text" th:text="${ad.text}" />
                 <td id="EDT"><span th:text="${ad.getContracts().getStartDate()}"/> ~ <span
                         th:text="${ad.getContracts().getEndDate()}"/></td>
-                <td id="count" th:text="${ad.price}"></td>
-                <td id="regdate" th:text="${ad.getContracts().getStartDate()}"></td>
+                <td id="count" th:text="${ad.price}" />
+                <td id="regdate" th:text="${ad.getContracts().getStartDate()}" />
+                <td id="isActive" th:text="${ad.getContracts().getIsActive() ? '활성' : '만료'}" />
                 <td id="action">
                     <form name="detailForm" action="/">
                         <button name ="detailButton" class="button">
@@ -71,7 +73,7 @@
                         </button>
                     </form>
                     <button type="button" th:onclick="'openIdPopup(\'popupModify\', \'' + ${ad.id} + '\')'">수정</button>
-                    <button type="button" onclick="openPopup('popupDelete')">삭제</button>
+                    <button type="button" th:onclick="'openIdPopup(\'popupDelete\', \'' + ${ad.id} + '\')'">삭제</button>
                 </td>
             </tr>
             </tbody>

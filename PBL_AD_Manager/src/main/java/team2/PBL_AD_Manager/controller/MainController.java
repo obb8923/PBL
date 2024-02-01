@@ -106,5 +106,12 @@ public class MainController {
 		return "redirect:/";
 	}
 
+	@PostMapping("/ad/delete")
+	public String delete(@RequestParam("adId") Long adId){
+
+		adService.delete(adId);
+
+		return "redirect:/";
+	}
 
 }

@@ -42,6 +42,8 @@ public class Contracts {
 
 	private Long targetId;
 
+	private Boolean isActive;
+
 	public void setAd(Ad ad) {
 		this.ad = ad;
 		ad.setContracts(this);
@@ -63,6 +65,7 @@ public class Contracts {
 
 		contracts.setStartDate(startDate);
 		contracts.setEndDate(endDate);
+		contracts.setIsActive(true);
 		return contracts;
 	}
 
