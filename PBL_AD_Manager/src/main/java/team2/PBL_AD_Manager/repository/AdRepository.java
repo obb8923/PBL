@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
+import team2.PBL_AD_Manager.controller.Form.SearchForm;
 import team2.PBL_AD_Manager.domain.Gender;
 import team2.PBL_AD_Manager.domain.SlotPosition;
 import team2.PBL_AD_Manager.domain.adType.Ad;
@@ -32,15 +34,36 @@ public class AdRepository {
 	}
 
 	// AdRepository.java
-	public Long findTotalNumber() {
+	public Long findTotalNumber(SearchForm searchForm) {
 		String jpql = "SELECT COUNT(a) FROM Ad a";
 		return em.createQuery(jpql, Long.class).getSingleResult();
 	}
 
-	public List<Ad> findAllWithPagination(int startIdx, int endIdx) {
-		String jpql = "SELECT a FROM Ad a WHERE a.id >= :startIdx AND a.id <= :endIdx ORDER BY a.id DESC"; // 내림차순 정렬
+	public List<Ad> findAllWithPagination(int startIdx, int endIdx, SearchForm searchForm) {
+		// String jpql = "SELECT a FROM Ad a WHERE a.id >= :startIdx AND a.id <= :endIdx ORDER BY a.id DESC"; // 내림차순 정렬
 
-		return em.createQuery(jpql, Ad.class)
+		String jpql = "SELECT a FROM Ad a WHERE a.id >= :startIdx AND a.id <= :endIdx";
+		if(searchForm.getIsActive() != null){
+			jpql += " AND a.contracts.isActive = :status";
+		}
+
+		if(!Objects.equals(searchForm.getSearchText(), "")){
+			jpql += " AND a.text = :text";
+		}
+
+		jpql += " ORDER BY a.id DESC";
+
+		TypedQuery<Ad> query = em.createQuery(jpql, Ad.class);
+
+		if(searchForm.getIsActive() != null){
+			query.setParameter("status", searchForm.getIsActive());
+		}
+
+		if(!Objects.equals(searchForm.getSearchText(), "")){
+			query.setParameter("text", searchForm.getSearchText());
+		}
+
+		return query
 			.setParameter("startIdx", startIdx)
 			.setParameter("endIdx", endIdx)
 			.getResultList();

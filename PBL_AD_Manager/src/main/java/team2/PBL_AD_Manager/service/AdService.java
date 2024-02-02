@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import team2.PBL_AD_Manager.controller.Form.AdForm;
+import team2.PBL_AD_Manager.controller.Form.SearchForm;
 import team2.PBL_AD_Manager.controller.Form.UserForm;
 import team2.PBL_AD_Manager.domain.Advertiser;
 import team2.PBL_AD_Manager.domain.Contracts;
@@ -70,9 +71,9 @@ public class AdService {
 
 	// AdService.java
 
-	public List<Ad> findAdsByPage(int pageNum) throws Exception {
+	public List<Ad> findAdsByPage(int pageNum, SearchForm searchForm) throws Exception {
 		int unitNum = 5; // 각 페이지에 표시할 광고 수
-		Long totalNum = adRepository.findTotalNumber(); // 전체 광고 수 조회
+		Long totalNum = adRepository.findTotalNumber(searchForm); // 전체 광고 수 조회
 
 		// 에러 처리
 		if (totalNum > Integer.MAX_VALUE) {
@@ -92,7 +93,7 @@ public class AdService {
 			endIdx = totalNum.intValue() - unitNum * (pageNum - 1);
 		}
 		System.out.println(startIdx + " " + endIdx);
-		return adRepository.findAllWithPagination(startIdx, endIdx);
+		return adRepository.findAllWithPagination(startIdx, endIdx, searchForm);
 	}
 
 	public Gender checkGender(String gender) {

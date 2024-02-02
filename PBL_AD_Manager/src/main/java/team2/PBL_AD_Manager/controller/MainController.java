@@ -4,12 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 import team2.PBL_AD_Manager.controller.Form.AdForm;
+import team2.PBL_AD_Manager.controller.Form.SearchForm;
 import team2.PBL_AD_Manager.controller.Form.UserForm;
 import team2.PBL_AD_Manager.domain.Advertiser;
 import team2.PBL_AD_Manager.domain.Contracts;
@@ -38,7 +40,7 @@ public class MainController {
 	}
 
 	@GetMapping("/{pageNum}")
-	public String pagination(@PathVariable("pageNum") int pageNum, Model model) throws Exception {
+	public String pagination(@PathVariable("pageNum") int pageNum, @ModelAttribute("searchForm")SearchForm searchForm, Model model) throws Exception {
 
 		// adForm 객체를 모델에 추가
 		AdForm adForm = new AdForm(); // AdForm 클래스의 인스턴스 생성
@@ -47,11 +49,12 @@ public class MainController {
 		model.addAttribute("adForm", adForm);
 		model.addAttribute("users", userService.findUsers());
 
-		if(adRepository.findTotalNumber() != 0){
+		if(adRepository.findTotalNumber(searchForm) != 0){
 			model.addAttribute("pageNum", pageNum);
-			model.addAttribute("totalNum", adRepository.findTotalNumber());
-			model.addAttribute("ads", adService.findAdsByPage(pageNum));
+			model.addAttribute("totalNum", adRepository.findTotalNumber(searchForm));
+			model.addAttribute("ads", adService.findAdsByPage(pageNum,searchForm));
 			model.addAttribute("userForm", userForm);
+			model.addAttribute("searchForm", searchForm);
 		}
 		return "main";
 	}

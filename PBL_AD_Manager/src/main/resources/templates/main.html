@@ -32,15 +32,18 @@
         <button id=ADTestButton type="button" onclick="openPopup('popupAdTest')">AD Test</button>
 
     </div>
-    <div class="searchLevel">
-        <select id="searchSelect">
-            <option>검색조건선택</option>
-            <option>advertiser</option>
-            <option>text</option>
+
+    <!-- 검색 테이블 -->
+    <form th:object="${searchForm}" class="searchLevel">
+        <select th:field="*{isActive}" id = "searchSelect">
+            <option value="">광고상태</option>
+            <option th:value="true" th:text="활성"></option>
+            <option th:value="false" th:text="만료"></option>
         </select>
-        <input id="searchInput" type="text" placeholder="여기에 쓰세요"/>
-        <button type="button">검색</button>
-    </div>
+        <input type="text" th:field="*{searchText}" id="searchInput"  placeholder="ad title"/>
+        <button type="submit">검색</button>
+    </form>
+
     <!-- 테이블 -->
     <div class="tableLevel">
         <table id="ADTable">

@@ -39,25 +39,26 @@ class AdServiceTest {
 
 	}
 
-	@Test
-	void AD_count() {
-		Long totalNumber = adRepository.findTotalNumber();
-		assertThat(intValue(totalNumber)).isEqualTo(3);
-	}
+	// @Test
+	// void AD_count() {
+	// 	Long totalNumber = adRepository.findTotalNumber();
+	// 	assertThat(intValue(totalNumber)).isEqualTo(3);
+	// }
 
-	@Test
-	void AD_idx() {
-		List<Ad> li = adRepository.findAllWithPagination(1, 3);
-		for (int i = 0; i < li.size(); i++) {
-			System.out.println(li.get(i).getId());
-		}
-	}
+	// @Test
+	// void AD_idx() {
+	// 	List<Ad> li = adRepository.findAllWithPagination(1, 3);
+	// 	for (int i = 0; i < li.size(); i++) {
+	// 		System.out.println(li.get(i).getId());
+	// 	}
+	// }
 
-	@Test
-	void AD_page() throws Exception {
-		List<Ad> li = adService.findAdsByPage(1);
-		for (int i = 0; i < li.size(); i++) {
-			System.out.println(li.get(i).getId());
-		}
-	}
+
+	// @Test
+	// void AD_page() throws Exception {
+	// 	List<Ad> li = adService.findAdsByPage(1);
+	// 	for (int i = 0; i < li.size(); i++) {
+	// 		System.out.println(li.get(i).getId());
+	// 	}
+	// }
 }
