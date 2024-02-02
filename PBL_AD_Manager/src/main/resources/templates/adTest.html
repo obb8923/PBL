@@ -13,10 +13,10 @@
     <div>AdTest Page 입니다</div>
     <form method="post" action="/ad/count">
         <div>Top Ad</div>
-        <img th:src="${targetTopAd.getUrl()}"/>
+        <img th:src="${targetTopAd.getUrl()}" onerror="this.src=`https://salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png`"/>
         <button type="submit" >Top 광고 클릭</button>
         <div>Bottom Ad</div>
-        <img th:src="${targetBottomAd.getUrl()}"/>
+        <img th:src="${targetBottomAd.getUrl()}" onerror="this.src=`https://salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png`"/>
         <button type="submit" >Bottom 광고 클릭</button>
     </form>
 </body>
