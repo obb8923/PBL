@@ -13,16 +13,16 @@
 <div id="popupContainer" class="popup-container"></div>
 
 <!-- 레이어 팝업 ADD-->
-<div th:replace="modal/addModal :: addModal" />
+<div th:replace="~{modal/addModal :: addModal}" />
 
 <!--레이어팝업 수정-->
-<div th:replace="modal/editModal :: editMoodal" />
+<div th:replace="~{modal/editModal :: editMoodal}" />
 
 <!--레이어팝업 삭제-->
-<div th:replace="modal/deleteModal :: deleteModal" />
+<div th:replace="~{modal/deleteModal :: deleteModal}" />
 
 <!--레이어 팝업 ADTest-->
-<div th:replace="modal/userInfoModal :: userInfoModal" />
+<div th:replace="~{modal/userInfoModal :: userInfoModal}" />
 <!-- 제목 -->
 <h2 class=mainTitle>AD Manager Platform - AD List</h2>
 <div class=levelBox>
