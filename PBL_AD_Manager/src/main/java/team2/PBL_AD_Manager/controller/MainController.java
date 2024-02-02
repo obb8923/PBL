@@ -1,8 +1,5 @@
 package team2.PBL_AD_Manager.controller;
 
-import java.util.List;
-import java.util.Objects;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,14 +10,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 import team2.PBL_AD_Manager.controller.Form.AdForm;
+import team2.PBL_AD_Manager.controller.Form.UserForm;
 import team2.PBL_AD_Manager.domain.Advertiser;
 import team2.PBL_AD_Manager.domain.Contracts;
+import team2.PBL_AD_Manager.domain.Gender;
 import team2.PBL_AD_Manager.domain.TargetInf;
 import team2.PBL_AD_Manager.domain.adType.Ad;
 import team2.PBL_AD_Manager.repository.AdRepository;
 import team2.PBL_AD_Manager.service.AdService;
 import team2.PBL_AD_Manager.service.AdvertiserService;
-import team2.PBL_AD_Manager.service.CheckService;
+import team2.PBL_AD_Manager.service.TargetService;
 import team2.PBL_AD_Manager.service.UserService;
 
 @Controller
@@ -31,36 +30,29 @@ public class MainController {
 	private final UserService userService;
 	private final AdService adService;
 	private final AdRepository adRepository;
-	private final CheckService checkService;
-
-
+	private final TargetService targetService;
 
 	@GetMapping("/")
-	public String getAdApi(Model model) {
-		if(Objects.equals(checkService.checkDB(model), "main")){
-			return "main";
-		}
+	public String accessPage() {
 		return "redirect:/1";
 	}
 
 	@GetMapping("/{pageNum}")
 	public String pagination(@PathVariable("pageNum") int pageNum, Model model) throws Exception {
 
-		if(Objects.equals(checkService.checkDB(model), "main")){
-			return "main";
-		}
-
-		Long totalNum = adRepository.findTotalNumber();
-		List<Ad> adList = adService.findAdsByPage(pageNum);
-
 		// adForm 객체를 모델에 추가
 		AdForm adForm = new AdForm(); // AdForm 클래스의 인스턴스 생성
-		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("totalNum", totalNum);
-		model.addAttribute("ads", adList);
+		UserForm userForm = new UserForm();
 		model.addAttribute("advertisers", advertiserService.findAdvertisers());
 		model.addAttribute("adForm", adForm);
 		model.addAttribute("users", userService.findUsers());
+
+		if(adRepository.findTotalNumber() != 0){
+			model.addAttribute("pageNum", pageNum);
+			model.addAttribute("totalNum", adRepository.findTotalNumber());
+			model.addAttribute("ads", adService.findAdsByPage(pageNum));
+			model.addAttribute("userForm", userForm);
+		}
 		return "main";
 	}
 
@@ -108,8 +100,17 @@ public class MainController {
 	}
 
 	@PostMapping("/ad/test")
-	public String AdTest(){
+	public String adTest(UserForm userForm, Model model){
+		model.addAttribute("targetId", 1L);
+		model.addAttribute("targetTopAd", adService.findTargetAd(userForm, "top"));
+		model.addAttribute("targetBottomAd", adService.findTargetAd(userForm, "bottom"));
+
 		return "adTest";
+	}
+
+	@PostMapping("/ad/count")
+	public String adCount(){
+		return "redirect:/ad/count";
 	}
 
 }

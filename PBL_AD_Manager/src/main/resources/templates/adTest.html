@@ -11,5 +11,13 @@
 </head>
 <body>
     <div>AdTest Page 입니다</div>
+    <form method="post" action="/ad/count">
+        <div>Top Ad</div>
+        <img th:src="${targetTopAd.getUrl()}"/>
+        <button type="submit" >Top 광고 클릭</button>
+        <div>Bottom Ad</div>
+        <img th:src="${targetBottomAd.getUrl()}"/>
+        <button type="submit" >Bottom 광고 클릭</button>
+    </form>
 </body>
 </html>

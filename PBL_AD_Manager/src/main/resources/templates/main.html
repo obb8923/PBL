@@ -22,7 +22,7 @@
 <div th:replace="~{modal/deleteModal :: deleteModal}" />
 
 <!--레이어 팝업 ADTest-->
-<div th:replace="~{modal/userInfoModal :: userInfoModal}" />
+<div th:replace="~{modal/userInfoModal :: userInfoModal}" th:hidden="${totalNum == 0}"/>
 <!-- 제목 -->
 <h2 class=mainTitle>AD Manager Platform - AD List</h2>
 <div class=levelBox>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="userInfoModal" class="uesrInfoModal" >
-    <form id="popupAdTest" class="popup" method="post" action="/ad/test">
+    <form id="popupAdTest" class="popup" method="post" action="/ad/test" th:object="${userForm}">
         <div id="popupAdTestBox">
             <div id="popupAdTestTargetBox">
                 <div>Target</div>
@@ -15,8 +15,8 @@
             <div>
                 <div>Result</div>
                 <div id="ADTestResultUserId">유저 아이디 : <input id="TestResultId" readonly="readonly"/></div>
-                <div id="ADTesTResultAge">유저 나이 : <input id="TestResultAge" readonly="readonly"/></div>
-                <div id="ADTesTResultGender">유저 성별 : <input id="TestResultGender" readonly="readonly"/></div>
+                <div id="ADTesTResultAge">유저 나이 : <input id="TestResultAge" readonly="readonly" th:field="*{age}"/></div>
+                <div id="ADTesTResultGender">유저 성별 : <input id="TestResultGender" readonly="readonly" th:field="*{gender}"/></div>
                 <div>
                     <button type="submit">Web View</button>
                     <button type="button" onclick="closePopup('popupAdTest')">닫기</button>

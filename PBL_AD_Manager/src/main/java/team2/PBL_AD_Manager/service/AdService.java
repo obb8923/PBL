@@ -2,6 +2,9 @@ package team2.PBL_AD_Manager.service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import team2.PBL_AD_Manager.controller.Form.AdForm;
+import team2.PBL_AD_Manager.controller.Form.UserForm;
 import team2.PBL_AD_Manager.domain.Advertiser;
 import team2.PBL_AD_Manager.domain.Contracts;
 import team2.PBL_AD_Manager.domain.Gender;
@@ -133,7 +137,18 @@ public class AdService {
 
 		Contracts.updateContracts(contractsRepository.findContractByAdId(adForm.getAdId()),adForm.getPrice(), slotPosition, ad, targetService.findId(adForm.getAge(),gender),
 			adForm.getEndDate());
+	}
 
+	public Ad findTargetAd(UserForm userForm, String slotPosition){
+		Gender gender = checkGender(userForm.getGender());
+		Long targetId = targetService.findId(userForm.getAge(), gender);
+		List<Ad> targetAd = adRepository.findTargetAdByTargetId(targetId, slotPosition);
+		if(targetAd.isEmpty()){
+			targetAd = adRepository.findActiveAllAd();
+		}
+		Collections.shuffle(targetAd);
+
+		return targetAd.get(0);
 	}
 
 }

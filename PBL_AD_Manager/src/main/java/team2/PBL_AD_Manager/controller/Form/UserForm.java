@@ -6,5 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserForm {
-	private Long userId;
+
+	private int age;
+
+	private String gender;
 }
