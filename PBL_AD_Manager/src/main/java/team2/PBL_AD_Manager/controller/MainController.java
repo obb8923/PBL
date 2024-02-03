@@ -41,7 +41,6 @@ public class MainController {
 
 	@GetMapping("/{pageNum}")
 	public String pagination(@PathVariable("pageNum") int pageNum, @ModelAttribute("searchForm")SearchForm searchForm, Model model) throws Exception {
-
 		// adForm 객체를 모델에 추가
 		AdForm adForm = new AdForm(); // AdForm 클래스의 인스턴스 생성
 		UserForm userForm = new UserForm();
@@ -53,6 +52,8 @@ public class MainController {
 			model.addAttribute("pageNum", pageNum);
 			model.addAttribute("totalNum", adRepository.findTotalNumber(searchForm));
 			model.addAttribute("ads", adService.findAdsByPage(pageNum,searchForm));
+			System.out.println(
+				"adService.findAdsByPage(pageNum, searchForm) = " + adService.findAdsByPage(pageNum, searchForm));
 			model.addAttribute("userForm", userForm);
 			model.addAttribute("searchForm", searchForm);
 		}

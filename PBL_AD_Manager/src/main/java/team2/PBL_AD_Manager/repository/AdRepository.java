@@ -47,19 +47,19 @@ public class AdRepository {
 			jpql += " AND a.contracts.isActive = :status";
 		}
 
-		if(!Objects.equals(searchForm.getSearchText(), "")){
+		if(!Objects.equals(searchForm.getSearchText(), null)){
 			jpql += " AND a.text = :text";
 		}
 
 		jpql += " ORDER BY a.id DESC";
-
+		System.out.println("jpql = " + jpql);
 		TypedQuery<Ad> query = em.createQuery(jpql, Ad.class);
 
 		if(searchForm.getIsActive() != null){
 			query.setParameter("status", searchForm.getIsActive());
 		}
 
-		if(!Objects.equals(searchForm.getSearchText(), "")){
+		if(!Objects.equals(searchForm.getSearchText(), null)){
 			query.setParameter("text", searchForm.getSearchText());
 		}
 
