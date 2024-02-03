@@ -89,5 +89,4 @@ function clickSubmit(userInfo){
     document.getElementById("TestResultId").value = split[0];
     document.getElementById("TestResultAge").value = split[1];
     document.getElementById("TestResultGender").value = split[2];
-
 }

@@ -52,8 +52,7 @@ public class MainController {
 			model.addAttribute("pageNum", pageNum);
 			model.addAttribute("totalNum", adRepository.findTotalNumber(searchForm));
 			model.addAttribute("ads", adService.findAdsByPage(pageNum,searchForm));
-			System.out.println(
-				"adService.findAdsByPage(pageNum, searchForm) = " + adService.findAdsByPage(pageNum, searchForm));
+			
 			model.addAttribute("userForm", userForm);
 			model.addAttribute("searchForm", searchForm);
 		}

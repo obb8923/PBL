@@ -74,6 +74,7 @@ public class AdService {
 	public List<Ad> findAdsByPage(int pageNum, SearchForm searchForm) throws Exception {
 		int unitNum = 5; // 각 페이지에 표시할 광고 수
 		Long totalNum = adRepository.findTotalNumber(searchForm); // 전체 광고 수 조회
+
 		// 에러 처리
 		if (totalNum > Integer.MAX_VALUE) {
 			throw new Exception("totalNum exceeds Integer.MAX_VALUE in findAdsByPage");

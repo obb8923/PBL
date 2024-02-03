@@ -35,31 +35,48 @@ public class AdRepository {
 
 	// AdRepository.java
 	public Long findTotalNumber(SearchForm searchForm) {
-		String jpql = "SELECT COUNT(a) FROM Ad a";
-		return em.createQuery(jpql, Long.class).getSingleResult();
+		String jpql = "SELECT COUNT(a) FROM Ad a WHERE true";
+
+		if(searchForm.getIsActive() != null){
+			jpql += " AND a.contracts.isActive = :status";
+		}
+
+		if(!Objects.equals(searchForm.getSearchText(), null) && !Objects.equals(searchForm.getSearchText(), "")){
+			jpql += " AND a.text = :text";
+		}
+
+		TypedQuery<Long> query = em.createQuery(jpql, Long.class);
+
+		if(searchForm.getIsActive() != null){
+			query.setParameter("status", searchForm.getIsActive());
+		}
+
+		if(!Objects.equals(searchForm.getSearchText(), null)&& !Objects.equals(searchForm.getSearchText(), "")){
+			query.setParameter("text", searchForm.getSearchText());
+		}
+
+		return query.getSingleResult();
 	}
 
 	public List<Ad> findAllWithPagination(int startIdx, int endIdx, SearchForm searchForm) {
-		// String jpql = "SELECT a FROM Ad a WHERE a.id >= :startIdx AND a.id <= :endIdx ORDER BY a.id DESC"; // 내림차순 정렬
 
 		String jpql = "SELECT a FROM Ad a WHERE a.id >= :startIdx AND a.id <= :endIdx";
 		if(searchForm.getIsActive() != null){
 			jpql += " AND a.contracts.isActive = :status";
 		}
 
-		if(!Objects.equals(searchForm.getSearchText(), null)){
+		if(!Objects.equals(searchForm.getSearchText(), null) && !Objects.equals(searchForm.getSearchText(), "")){
 			jpql += " AND a.text = :text";
 		}
 
 		jpql += " ORDER BY a.id DESC";
-		System.out.println("jpql = " + jpql);
 		TypedQuery<Ad> query = em.createQuery(jpql, Ad.class);
 
 		if(searchForm.getIsActive() != null){
 			query.setParameter("status", searchForm.getIsActive());
 		}
 
-		if(!Objects.equals(searchForm.getSearchText(), null)){
+		if(!Objects.equals(searchForm.getSearchText(), null) &&!Objects.equals(searchForm.getSearchText(), "")){
 			query.setParameter("text", searchForm.getSearchText());
 		}
 
