@@ -1,4 +1,4 @@
-![image](https://github.com/PBL-AD-Management/Backend/assets/55120730/80ca17a4-714a-4327-b76c-26e91a82e110)# PBL project : Make AD management Server
+# PBL project : Make AD management Server
 
 ## 💻프로젝트 소개
 국민대학교 에서 ( 2024/01/08 ~ 2024/01/19 ) 10일간 진행한, 광고 관리 서비스 제작 프로젝트입니다.
