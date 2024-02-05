@@ -1,4 +1,4 @@
-# PBL project : Make AD management Server
+![image](https://github.com/PBL-AD-Management/Backend/assets/55120730/80ca17a4-714a-4327-b76c-26e91a82e110)# PBL project : Make AD management Server
 
 ## 💻프로젝트 소개
 국민대학교 에서 ( 2024/01/08 ~ 2024/01/19 ) 10일간 진행한, 광고 관리 서비스 제작 프로젝트입니다.
@@ -42,7 +42,11 @@
    3. Table 의 상세 버튼을 누르면 상세페이지로 넘어간다.
    4. ADD 버튼을 누르면 광고 정보를 입력할 수 있는 레이어 팝업이 나온다.
    5. ADD 버튼 레이어 팝업에서 확인을 누르면 DB에 광고 정보가 저장되며, 홈화면이 redirection 되어 Table의 정보가 바뀐다.
-   6. ADTest , 수정, 삭제 기능은 미완성이다.
+   6. 삭제 버튼 레이어 팝업에서 확인을 누르면 DB에 저장되어 있는 해당 광고의 isActive colum 이 false 로 변경된다. ui 에서 광고 만료 여부가 활성에서 만료로 변경되고 list 에서 조회는 되지만, 실제 adTest시에는 해당 광고가 출력되지 않는다
+   7. 수정 버튼 레이어 팝업에서 수정 데이터를 입력하고 확인을 누르면 해당 광고 id를 통해 DB 에서 광고를 찾아와 입력데이터로 수정된 후 다시 저장된다
+   8. 검색기능은 두가지로 select를 통해 활성 또는 비활성인 광고만을 조회할 수 있고, input 창을 통해서 찾는 광고 title 을 입력하면 해당 title을 가진 광고를 list에 보여준다
+   9. ADTest 레이어에서 유저를 선택하면 해당 유저의 정보가 출력된다(age, gender). Web View버튼을 누르게 되면 해당 유저정보를 바탕으로 DB 의 targetInf table을 조회해 해당 유저의 target Id를 찾아낸다. 이후 contract table 에서 해당 id와 동일한 광고를 찾아온후 페이지에 보여준다
+   
       
    * ### 홈화면
 ![image](https://github.com/PBL-AD-Management/Backend/assets/59199893/ed3e8d9a-bf37-4834-8416-987fcfe850e4)
@@ -53,7 +57,27 @@
    * ### ADD 버튼을 눌렀을때 나오는 레이어 팝업
 ![image](https://github.com/PBL-AD-Management/Backend/assets/59199893/537d3028-4330-4bd0-8693-4087dbcacf35)
    * ### AD Test 버튼을 눌렀을때 나오는 레이어 팝업
+   ## 이전 버전
 ![image](https://github.com/PBL-AD-Management/Backend/assets/59199893/415b8150-f9b9-43ca-b4e4-c7563d4bd234)
+   ## 수정 버전
+![image](https://github.com/PBL-AD-Management/Backend/assets/55120730/8e67dd53-2b61-4b4b-8170-300d2f609cbd)
+   * ### adTest Page
+![image](https://github.com/PBL-AD-Management/Backend/assets/55120730/5c9c1f07-5251-4827-b84c-6336392623a9)
+   * ### 삭제 버튼을 눌렀을때 나오는 레이어 팝업(6번 광고)
+![image](https://github.com/PBL-AD-Management/Backend/assets/55120730/5a98a539-96f3-4187-8970-d9dff76611a6)
+   * ### 삭제 후 : 만료가 되면 조회는 되지만 실제 광고slot에 보여지지 않는다
+![image](https://github.com/PBL-AD-Management/Backend/assets/55120730/028eba4e-c5ac-4182-99f6-282d9f679163)
+   * ### 검색 기능(활성 여부, 광고 title)
+![image](https://github.com/PBL-AD-Management/Backend/assets/55120730/8e3d18f5-2848-496b-8030-3e9a7ab5f068)
+![image](https://github.com/PBL-AD-Management/Backend/assets/55120730/64764f27-e7cf-456a-a8b1-904e41f35bd2)
+   * ### 수정 기능(7번 수정)
+![image](https://github.com/PBL-AD-Management/Backend/assets/55120730/79e21039-6ed7-4e76-8a00-cd8c83ab0d6f)
+![image](https://github.com/PBL-AD-Management/Backend/assets/55120730/aa89301d-30ca-4daa-bcc7-d511ed4f971f)
+
+
+
+
+
 
 
 ## 🔗사용한 기술
