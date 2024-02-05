@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="userInfoModal" class="uesrInfoModal" >
-    <form id="popupAdTest" class="popup" method="post" action="/ad/test" th:object="${userForm}">
+    <form id="popupAdTest" class="popup" name="userForm" method="get" action="/ad/test" th:object="${userForm}">
         <div id="popupAdTestBox">
             <div id="popupAdTestTargetBox">
                 <div>Target</div>

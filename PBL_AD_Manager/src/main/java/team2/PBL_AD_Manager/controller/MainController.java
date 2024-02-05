@@ -52,7 +52,7 @@ public class MainController {
 			model.addAttribute("pageNum", pageNum);
 			model.addAttribute("totalNum", adRepository.findTotalNumber(searchForm));
 			model.addAttribute("ads", adService.findAdsByPage(pageNum,searchForm));
-			
+
 			model.addAttribute("userForm", userForm);
 			model.addAttribute("searchForm", searchForm);
 		}
@@ -102,18 +102,15 @@ public class MainController {
 		return "redirect:/";
 	}
 
-	@PostMapping("/ad/test")
-	public String adTest(UserForm userForm, Model model){
+	@GetMapping(value = "/ad/test")
+	public String adTest(@ModelAttribute("userForm") UserForm userForm, Model model){
 		model.addAttribute("targetId", 1L);
-		model.addAttribute("targetTopAd", adService.findTargetAd(userForm, "top"));
+		Ad targetAd = adService.findTargetAd(userForm, "top");
+		model.addAttribute("targetTopAd", targetAd);
 		model.addAttribute("targetBottomAd", adService.findTargetAd(userForm, "bottom"));
+
+		adService.incAdCount(userForm.getAdId());
 
 		return "adTest";
 	}
-
-	@PostMapping("/ad/count")
-	public String adCount(){
-		return "redirect:/ad/count";
-	}
-
 }

@@ -151,4 +151,15 @@ public class AdService {
 		return targetAd.get(0);
 	}
 
+	@Transactional
+	public void incAdCount(Long adId){
+		if(adId == null){
+			return;
+		}
+		Ad ad = findOne(adId);
+		int clickCount = ad.getClickCount();
+
+		ad.setClickCount(clickCount + 1);
+	}
+
 }

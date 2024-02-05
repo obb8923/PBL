@@ -10,4 +10,6 @@ public class UserForm {
 	private int age;
 
 	private String gender;
+
+	private Long adId;
 }

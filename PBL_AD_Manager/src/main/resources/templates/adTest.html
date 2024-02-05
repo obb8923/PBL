@@ -11,13 +11,24 @@
 </head>
 <body>
     <div>AdTest Page 입니다</div>
-    <form method="post" action="/ad/count">
+    <script>
+        function submitForm(adId){
+            document.getElementById("adId").value = adId;
+            document.getElementById("submitForm").submit();
+        }
+
+    </script>
+    <form th:object="${userForm}" id="submitForm">
+        <input th:field="*{age}" id="age" hidden="hidden" />
+        <input th:field="*{gender}" id="gender" hidden="hidden"/>
+        <input th:field="*{adId}" id="adId" hidden="hidden" />
+
         <div>Top Ad</div>
         <img th:src="${targetTopAd.getUrl()}" onerror="this.src=`https://salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png`"/>
-        <button type="submit" >Top 광고 클릭</button>
+        <button type="button" th:onclick="'submitForm(\'' + ${targetTopAd.getId()} + '\')'">Top 광고 클릭</button>
         <div>Bottom Ad</div>
         <img th:src="${targetBottomAd.getUrl()}" onerror="this.src=`https://salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png`"/>
-        <button type="submit" >Bottom 광고 클릭</button>
+        <button type="button" th:onclick="'submitForm(\'' + ${targetBottomAd.getId()} + '\')'">Bottom 광고 클릭</button>
     </form>
 </body>
 </html>
