@@ -14,9 +14,10 @@
 <div id="popupContainer" class="popup-container"></div>
 
 <!-- 레이어 팝업 ADD-->
-<div th:replace="~{modal/addModal :: addModal}" />
+<div th:replace="~{modal/addModal :: addModal}"></div>
 
 <!--레이어팝업 수정-->
+<<<<<<< HEAD
 <div th:replace="~{modal/editModal :: editMoodal}" id="editModal" />
 
 <!--레이어팝업 삭제-->
@@ -24,6 +25,15 @@
 
 <!--레이어 팝업 ADTest-->
 <div th:replace="~{modal/userInfoModal :: userInfoModal}" id="adTestModal"/>
+=======
+<div th:replace="~{modal/editModal :: editMoodal}" id="editModal"></div>
+
+<!--레이어팝업 삭제-->
+<div th:replace="~{modal/deleteModal :: deleteModal}" id="deleteModal"></div>
+
+<!--레이어 팝업 ADTest-->
+<div th:replace="~{modal/userInfoModal :: userInfoModal}" id="adTestModal"></div>
+>>>>>>> dev
 <!-- 제목 -->
 <div>
     <h2 class=mainTitle>AD Manager Platform - AD List</h2>
@@ -37,15 +47,7 @@
     </div>
 
     <!-- 검색 테이블 -->
-    <form th:object="${searchForm}" class="searchLevel">
-        <select th:field="*{isActive}" id = "searchSelect">
-            <option value="">광고상태</option>
-            <option th:value="true" th:text="활성"></option>
-            <option th:value="false" th:text="만료"></option>
-        </select>
-        <input type="text" th:field="*{searchText}" id="searchInput"  placeholder="ad title"/>
-        <button type="submit">검색</button>
-    </form>
+    <div th:replace="~{service/search :: searchTable}" id="searchTable"></div>
 
     <!-- 테이블 -->
     <div class="tableLevel">
@@ -84,41 +86,9 @@
             </tr>
             </tbody>
         </table>
-        <!-- 페이지네이션 버튼 -->
     </div>
-    <div class="paginationLevel">
-        <span></span>
-        <div>
-            <form name="exexForm" action="/">
-                <button id="exexButton" type="submit"></button>
-            </form>
-            <form name="exForm" action="/">
-                <button id="exButton" type="submit"></button>
-            </form>
-            <form name="curForm"  action="/">
-                <button id="curButton" type="submit"></button>
-            </form>
-            <form   name="postForm" action="/">
-                <button id="postButton" type="submit"></button>
-            </form>
-            <form  name="postpostForm" action="/">
-                <button id="postpostButton" type="submit"></button>
-            </form>
-
-            <script th:inline="javascript">
-                let totalNum = [[${totalNum}]];
-                let endPage = Math.floor(totalNum / 5)+1;
-                let curPage = [[${pageNum}]];
-                //document.getElementById("toEndPage").action = '/' + endPage;
-                if(totalNum===0){
-
-                }else{
-                    pageButton(endPage,curPage);
-                }
-            </script>
-        </div>
-        <span></span>
-    </div>
+    <!-- 페이지네이션 버튼 -->
+    <div th:replace="~{service/pagination :: paginationTable}" id="paginationTable"></div>
 </div>
 </body>
 </html>
