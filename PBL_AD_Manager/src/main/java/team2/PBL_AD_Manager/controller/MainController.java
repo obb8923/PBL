@@ -32,7 +32,7 @@ public class MainController {
 	private final UserService userService;
 	private final AdService adService;
 	private final AdRepository adRepository;
-	private final TargetService targetService;
+	
 
 	@GetMapping("/")
 	public String accessPage() {
@@ -47,14 +47,13 @@ public class MainController {
 		model.addAttribute("advertisers", advertiserService.findAdvertisers());
 		model.addAttribute("adForm", adForm);
 		model.addAttribute("users", userService.findUsers());
+		model.addAttribute("userForm", userForm);
+		model.addAttribute("searchForm", searchForm);
 
 		if(adRepository.findTotalNumber(searchForm) != 0){
-			model.addAttribute("pageNum", pageNum);
 			model.addAttribute("totalNum", adRepository.findTotalNumber(searchForm));
+			model.addAttribute("pageNum", pageNum);
 			model.addAttribute("ads", adService.findAdsByPage(pageNum,searchForm));
-
-			model.addAttribute("userForm", userForm);
-			model.addAttribute("searchForm", searchForm);
 		}
 		return "main";
 	}

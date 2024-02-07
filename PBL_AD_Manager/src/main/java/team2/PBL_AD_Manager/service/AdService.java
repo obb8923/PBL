@@ -72,7 +72,7 @@ public class AdService {
 	// AdService.java
 
 	public List<Ad> findAdsByPage(int pageNum, SearchForm searchForm) throws Exception {
-		int unitNum = 5; // 각 페이지에 표시할 광고 수
+
 		Long totalNum = adRepository.findTotalNumber(searchForm); // 전체 광고 수 조회
 
 		// 에러 처리
@@ -83,16 +83,7 @@ public class AdService {
 			throw new Exception("No ads data in the database");
 		}
 
-		// DB 조회 범위 정하기
-		int startIdx, endIdx;
-		if (totalNum < pageNum) {
-			startIdx = 1;
-			endIdx = totalNum.intValue();
-		} else {
-			startIdx = totalNum.intValue() - unitNum * pageNum + 1;
-			endIdx = totalNum.intValue() - unitNum * (pageNum - 1);
-		}
-		return adRepository.findAllWithPagination(startIdx, endIdx, searchForm);
+		return adRepository.findAllWithPagination(pageNum, searchForm);
 	}
 
 	public Gender checkGender(String gender) {

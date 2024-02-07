@@ -10,19 +10,20 @@
 </head>
 
 <body>
+
 <div id="popupContainer" class="popup-container"></div>
 
 <!-- 레이어 팝업 ADD-->
 <div th:replace="~{modal/addModal :: addModal}" />
 
 <!--레이어팝업 수정-->
-<div th:replace="~{modal/editModal :: editMoodal}" />
+<div th:replace="~{modal/editModal :: editMoodal}" id="editModal" />
 
 <!--레이어팝업 삭제-->
-<div th:replace="~{modal/deleteModal :: deleteModal}" />
+<div th:replace="~{modal/deleteModal :: deleteModal}" id="deleteModal" />
 
 <!--레이어 팝업 ADTest-->
-<div th:replace="~{modal/userInfoModal :: userInfoModal}" th:hidden="${totalNum == 0}"/>
+<div th:replace="~{modal/userInfoModal :: userInfoModal}" id="adTestModal"/>
 <!-- 제목 -->
 <div>
     <h2 class=mainTitle>AD Manager Platform - AD List</h2>

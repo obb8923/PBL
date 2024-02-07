@@ -58,9 +58,9 @@ public class AdRepository {
 		return query.getSingleResult();
 	}
 
-	public List<Ad> findAllWithPagination(int startIdx, int endIdx, SearchForm searchForm) {
+	public List<Ad> findAllWithPagination(int pageNum, SearchForm searchForm) {
 
-		String jpql = "SELECT a FROM Ad a WHERE a.id >= :startIdx AND a.id <= :endIdx";
+		String jpql = "SELECT a FROM Ad a WHERE true";
 		if(searchForm.getIsActive() != null){
 			jpql += " AND a.contracts.isActive = :status";
 		}
@@ -79,10 +79,10 @@ public class AdRepository {
 		if(!Objects.equals(searchForm.getSearchText(), null) &&!Objects.equals(searchForm.getSearchText(), "")){
 			query.setParameter("text", searchForm.getSearchText());
 		}
-
+		int index = (pageNum-1) * 5;
 		return query
-			.setParameter("startIdx", startIdx)
-			.setParameter("endIdx", endIdx)
+			.setFirstResult(index)
+			.setMaxResults(5)
 			.getResultList();
 	}
 
