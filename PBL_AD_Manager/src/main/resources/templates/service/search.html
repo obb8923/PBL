@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="searchTable">
+    <form th:object="${searchForm}" class="searchLevel">
+        <select th:field="*{isActive}" id = "searchSelect">
+            <option value="">광고상태</option>
+            <option th:value="true" th:text="활성"></option>
+            <option th:value="false" th:text="만료"></option>
+        </select>
+        <input type="text" th:field="*{searchText}" id="searchInput"  placeholder="ad title"/>
+        <button type="submit">검색</button>
+    </form>
+</div>
+</html>

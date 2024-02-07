@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="paginationTable" class="paginationLevel">
+    <span></span>
+    <div>
+        <form name="exexForm" action="/">
+            <button id="exexButton" type="submit"></button>
+        </form>
+        <form name="exForm" action="/">
+            <button id="exButton" type="submit"></button>
+        </form>
+        <form name="curForm"  action="/">
+            <button id="curButton" type="submit"></button>
+        </form>
+        <form   name="postForm" action="/">
+            <button id="postButton" type="submit"></button>
+        </form>
+        <form  name="postpostForm" action="/">
+            <button id="postpostButton" type="submit"></button>
+        </form>
+
+        <script th:inline="javascript">
+            let totalNum = [[${totalNum}]];
+            let endPage = Math.floor(totalNum / 5)+1;
+            let curPage = [[${pageNum}]];
+            //document.getElementById("toEndPage").action = '/' + endPage;
+            if(totalNum===0){
+
+            }else{
+                pageButton(endPage,curPage);
+            }
+        </script>
+    </div>
+    <span></span>
+</div>
+</html>
