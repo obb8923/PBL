@@ -108,7 +108,7 @@ public class AdService {
 		Gender gender = checkGender(adForm.getGender());
 		SlotPosition slotPosition = (adForm.getSlotPosition().equals("top")) ? SlotPosition.top : SlotPosition.bottom;
 		String startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		adRepository.saveAd(ad);
+
 		Advertiser advertiser = advertiserRepository.findAdvertiser(adForm.getCompanyId());
 		Contracts contracts = Contracts.createContracts(adForm.getPrice(), slotPosition, ad, targetService.findId(adForm.getAge(),gender), advertiser, startDate,
 			adForm.getEndDate());

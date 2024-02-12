@@ -1,7 +1,10 @@
 package team2.PBL_AD_Manager.domain.adType;
 
+import static jakarta.persistence.FetchType.*;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,7 +38,7 @@ public abstract class Ad {
 
 	private int price;
 
-	@OneToOne(mappedBy = "ad")
+	@OneToOne(mappedBy = "ad", fetch = LAZY)
 	private Contracts contracts;
 
 }
