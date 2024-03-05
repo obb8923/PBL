@@ -1,20 +1,35 @@
 # PBL project : Make AD management Server
 
 ## 💻프로젝트 소개
-국민대학교 에서 ( 2024/01/08 ~ 2024/01/19 ) 10일간 진행한, 광고 관리 서비스 제작 프로젝트입니다.
+국민대학교에서 ( 2024/01/08 ~ 2024/01/19 ) 10일간 진행한, 광고 관리 서비스 제작 프로젝트입니다.
 
-## 🙋‍♂️팀원 소개
+<br>
+
+## 👨‍👩‍👧‍👦 팀원 소개
 [김유빈](https://github.com/KimYooBin1) - 국민대학교 소프트웨어학과 3학년 
 
-[김혜은](https://github.com/hyeesw) - 국민대학교 소프트웨어학과 2학년 
+[김혜은](https://github.com/hyeesw) - 국민대학교 소프트웨어학과 3학년 
 
 [박정빈](https://github.com/obb8923) - 국민대학교 나노전자물리학과 3학년 
 
 [한초희](https://github.com/cherror) - 국민대학교 소프트웨어학과 2학년 
 
+<br>
+ 
+## 🗂️ 시스템 설계
+### Sceinaro
+<img src="https://github.com/PBL-AD-Management/Backend/assets/84231143/5142838f-e39b-4e7c-8255-ec46a007dc9a" width=50%>
 
+### ERD
+<img src="https://github.com/PBL-AD-Management/Backend/assets/84231143/e32899a8-3260-463f-a256-20822ac1c476" width=49%>
+<img src="https://github.com/PBL-AD-Management/Backend/assets/84231143/b15054b1-933d-4e58-b12f-c5a98e6ccd57" width=49%>
 
-## ⚙️시작 가이드
+### System Architecture
+<img src="https://github.com/PBL-AD-Management/Backend/assets/84231143/6f64f100-5854-4c62-ac43-7718ca52aef1" width=70%>
+
+<br><br>
+
+## ⚙️ 시작 가이드
    ### 요구사항
    `java 17+`
    `springframework.boot 3.2.1`
@@ -36,7 +51,10 @@
    database를 현재 사용가능한 것으로 설정한 후, url,name,password  적어준다.
 5.   class PblAdManagerApplication 를 실행시킨다. ( 위치 :프로젝트 폴더\PBL_AD_Manager\src\main\java\team2\PBL_AD_Manager )
 
-## 🛠️주요 기능
+
+<br><br>
+
+## 🛠️ 주요 기능
    1. 홈화면에서는 DB에서 광고를 가져와서 5개씩 Table로 보여준다.
    2. 홈화면을 가져올때 DB의 전체 광고 수를 가져와서 Pagination 버튼 5개의 넘버링을 하고 display 를 조절한다.
    3. Table 의 상세 버튼을 누르면 상세페이지로 넘어간다.
